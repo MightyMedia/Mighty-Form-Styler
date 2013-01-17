@@ -1,0 +1,11 @@
+/*
+	Just the minimum styling to make the thing work
+*/
+.mfs-container {position: relative; width: 100px;}
+.mfs-container select {display: none;}
+.mfs-options {position: absolute; width: 100%; padding: 0; margin: 0; list-style-type: none; background: #044BC7; border-top: 1px solid #000000;z-index: 10;}
+.mfs-options li a {display: block; padding: 2px 5px; text-decoration: none; color: #ffffff;}
+.mfs-options li.selected {background-color: #717171; color: #ffffff;}
+.mfs-options li.selected a {color: #ffffff;}
+.mfs-options li.active {background-color: #cccccc;}
+a.mfs-selected-option {display: block; padding: 2px 5px; text-decoration: none;  background: #044BC7;  color: #ffffff;}
