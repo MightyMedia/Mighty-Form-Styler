@@ -1,0 +1,20 @@
+{
+  "name": "mfs",
+  "title": "jQuery Mighty Form Styler",
+  "description": "jQuery Mighty Form Styler plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.",
+  "version": "0.1.2",
+  "author": {
+    "name": "Bas van den Wijngaard",
+    "url": "http://www.binkje.nl"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.binkje.nl/mfs/license.php"
+    }
+  ],
+  "homepage": "http://www.binkje.nl/mfs/",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
