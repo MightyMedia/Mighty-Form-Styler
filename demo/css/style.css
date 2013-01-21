@@ -1,0 +1,90 @@
+/*
+	Just the minimum styling to make the thing look nice
+*/
+label {
+	font-family: Helvetica, Arial; 
+	font-size: 12px;
+}
+
+.mfs-container {
+	position: relative; 
+	width: 130px;
+	
+	color: #666666; 
+	font-family: Helvetica, Arial; 
+	font-size: 12px;
+}
+.mfs-container select {display: none;}
+.mfs-options {
+	position: absolute; 
+	width: 100%; 
+	padding: 0; 
+	margin: 0; 
+	list-style-type: none; 
+	background: #ffffff; 
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	z-index: 10;
+}
+.mfs-options li a {
+	display: block; 
+	padding: 5px 5px; 
+	text-decoration: none; 
+	color: #666666;
+}
+.mfs-optgroup-option {
+	padding-left: 10px;
+}
+.mfs-options li.mfs-optgroup {
+	padding: 4px 5px;
+	color: #999999;
+}
+.mfs-options li.selected {
+	background-color: #666666; 
+}
+.mfs-options li.selected a {
+	color: #ffffff;
+}
+.mfs-options li.active {
+	background-color: #cccccc;
+}
+a.mfs-selected-option {
+	display: block; 
+	padding: 5px 5px; 
+	text-decoration: none; 
+	background: #ffffff; 
+	border: 1px solid #cccccc; 
+	border-radius: 5px; 
+	color: #666666;
+}
+a.mfs-selected-option span {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 25px;
+	padding: 5px 0;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	
+	background-image: linear-gradient(bottom, rgb(230,230,230) 36%, rgb(244,244,244) 68%);
+	background-image: -o-linear-gradient(bottom, rgb(230,230,230) 36%, rgb(244,244,244) 68%);
+	background-image: -moz-linear-gradient(bottom, rgb(230,230,230) 36%, rgb(244,244,244) 68%);
+	background-image: -webkit-linear-gradient(bottom, rgb(230,230,230) 36%, rgb(244,244,244) 68%);
+	background-image: -ms-linear-gradient(bottom, rgb(230,230,230) 36%, rgb(244,244,244) 68%);
+}
+
+a.mfs-selected-option span:after {
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 8px;
+	width: 0;
+	height: 0;
+	border-top: 4px solid #999999;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+	content: "";
+}

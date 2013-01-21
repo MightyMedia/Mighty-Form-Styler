@@ -1,0 +1,18 @@
+h1. 0.2.0 / 2013-01-21
+
+* Added support for optgroup options
+* Added better styled demo
+* Organized folders
+
+h1. 0.1.2 / 2012-12-23
+
+* Fixed active status on opening when there is already an selected option
+
+h1. 0.1.1 / 2012-12-20
+
+* Code cleanup
+* Added destroy and refresh function
+
+h1. 0.1 / 2012-12-18
+
+* Initial public beta release

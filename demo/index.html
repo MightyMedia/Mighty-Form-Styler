@@ -8,21 +8,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Mighty FormStyle</title>
   <meta name="description" content="">
-  
   <link rel="stylesheet" href="css/style.css">
-  
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
-  <script src="js/jquery.mfs.js"></script>
 </head>
 <body>
 
 <form>
 	<ul>
-		<li>
-			<label>textfield</label>
-			<input type="text" name="text">
-		</li>
 		<li>
 			<label for="simple-select">Simple select</label>
 			<select id="simple-select" name="simple-select">
@@ -34,6 +25,7 @@
 		<li>
 			<label>Select with optgroup</label>
 			<select id="optgroup-select" name="group-select">
+				<option value="opt0">option 0</option>
 				<optgroup label="group 1">
 					<option value="opt1">option 1</option>
 					<option value="opt2">option 2</option>
@@ -44,31 +36,17 @@
 					<option value="opt5">option 5</option>
 					<option value="opt6">option 6</option>
 				</optgroup>
+				<option value="opt7">option 7</option>
 			</select>
 		</li>
 	</ul>
 </form>
 
-
-<select name="simple-select">
-	<option value="opt1">option 1</option>
-	<option value="opt2">option 2</option>
-	<option value="opt3">option 3</option>
-</select>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="../jquery.mfs.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$('form').mfs();
-		
-/*
-		$('#simple-select').change(function(){
-			alert('Simple change');
-		});
-		
-		$('#optgroup-select').change(function(){
-			alert('Optgroup change');
-		});
-*/
 	});
 </script>
 

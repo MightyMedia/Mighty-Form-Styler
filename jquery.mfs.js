@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2012 Bas van den Wijngaard
- * Version: 0.1.2
+ * Version: 0.2.0
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -28,16 +28,35 @@
 		var mfsHtml = '';
 		var mfsOptionsHtml = '';
 		var indexCount = 0;
-		thisSelect.find('option').each(function(){
-			var thisLabel = $(this).html();
-			if (mfsLabel == '' || $(this).attr('selected') == 'selected') {
-				mfsLabel = thisLabel;
+		thisSelect.find('> option, optgroup').each(function(){
+			var thisTagName = $(this).get(0).tagName.toLowerCase();
+			//console.log(thisTagName);
+			if (thisTagName == 'option') {
+				var thisLabel = $(this).html();
+				if (mfsLabel == '' || $(this).attr('selected') == 'selected') {
+					mfsLabel = thisLabel;
+				}
+				mfsOptionsHtml += '<li class="mfs-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+				indexCount++;
 			}
-			mfsOptionsHtml += '<li><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
-			indexCount++;
+			if (thisTagName == 'optgroup') {
+				var optGroupLabel = $(this).attr('label');
+				mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
+				
+				$(this).find('option').each(function(){
+					var thisLabel = $(this).html();
+					if (mfsLabel == '' || $(this).attr('selected') == 'selected') {
+						mfsLabel = thisLabel;
+					}
+					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+					indexCount++;
+				});
+				
+				mfsOptionsHtml += mfsOptGroupHtml;
+			}
 		});
 		
-		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'</a>';
+		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>&nbsp;</span></a>';
 		mfsHtml += '<ul class="mfs-options">'+mfsOptionsHtml+'</ul>';
 		
 		mfsContainer.prepend(mfsHtml);
@@ -68,7 +87,7 @@
 		var selectElmOptions = selectElm.find('option');
 		var selectedOption = theContainer.find('a.mfs-selected-option');
 		var optionList = theContainer.find('ul.mfs-options');
-		var optionListLi = optionList.find('li');
+		var optionListLi = optionList.find('li.mfs-option');
 		var optionListOptions = optionList.find('a');
 		
 		optionList.hide();
@@ -82,12 +101,12 @@
 				optionListLi.removeClass('active');
 				optionListAll.hide();
 				optionList.show();
-				var optionListSelected = optionList.find('li.selected');
+				var optionListSelected = optionList.find('li.mfs-option.selected');
 				if (optionListSelected.length > 0) {
 					optionListSelected.addClass('active');
 				}
 				else {
-					optionList.find('li:first-child').addClass('active');
+					optionList.find('li.mfs-option:first-child').addClass('active');
 				}
 				mfsSelectOpen = optionList;
 			}
@@ -98,7 +117,7 @@
 		optionListOptions.click(function(){
 			optionListLi.removeClass('active').removeClass('selected');
 			$(this).closest('li').addClass('selected');
-			selectedOption.text($(this).text());
+			selectedOption.html($(this).text()+'<span>&nbsp;</span>');
 			selectElmOptions.removeAttr('selected');
 			selectElmOptions.eq($(this).attr('index')).attr('selected', 'selected');
 			optionList.hide();
@@ -170,10 +189,10 @@
 			$(document).keydown(function(event) {
 				var keyDown = event.keyCode
 				if (mfsSelectOpen !== false && (keyDown == 13 || keyDown == 38 || keyDown == 40 || keyDown == 27)) {
-					var activeOption = mfsSelectOpen.find('li.active');
+					var activeOption = mfsSelectOpen.find('li.mfs-option.active');
 					if (keyDown == 38) { // up
 						event.preventDefault();
-						var newActiveOption = activeOption.prev();
+						var newActiveOption = activeOption.prevAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
@@ -181,7 +200,7 @@
 					}
 					else if (keyDown == 40) { // down
 						event.preventDefault();
-						var newActiveOption = activeOption.next();
+						var newActiveOption = activeOption.nextAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
