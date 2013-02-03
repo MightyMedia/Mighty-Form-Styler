@@ -22,7 +22,7 @@
   "homepage": "http://www.binkje.nl/mfs/",
   "demo": "http://www.binkje.nl/mfs/",
   "bugs": "https://github.com/basvandenwijngaard/Mighty-Form-Styler/issues",
-  "docs": "https://github.com/basvandenwijngaard/Mighty-Form-Styler",
+  "docs": "https://github.com/basvandenwijngaard/Mighty-Form-Styler/blob/master/README.textile",
   "dependencies": {
     "jquery": ">=1.7"
   }
