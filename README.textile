@@ -21,16 +21,19 @@ bc. <script type="text/javascript" src="jquery.mfs.min.js"></script>
 
 h2. Basic usage
 
+h3. Initialize
+
 bc. $(document).ready(function(){
-	/* Initialize */
 	$('form').mfs();
-	
-	/* Refresh (e.g. when you updated the values via ajax) */
-	$('form').mfs('refresh');
-	
-	/* Remove */
-	$('form').mfs('destroy');
 });
+	
+h3. Refresh (e.g. when you updated the values via ajax)
+
+bc. $('form').mfs('refresh');
+	
+h3. Remove
+
+bc. $('form').mfs('destroy');
 
 h2. Issues
 
