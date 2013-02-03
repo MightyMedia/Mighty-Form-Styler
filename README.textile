@@ -24,10 +24,10 @@ h2. Basic usage
 bc. $(document).ready(function(){
 	/* Initialize */
 	$('form').mfs();
-
+	
 	/* Refresh (e.g. when you updated the values via ajax) */
 	$('form').mfs('refresh');
-
+	
 	/* Remove */
 	$('form').mfs('destroy');
 });
