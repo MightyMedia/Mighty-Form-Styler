@@ -3,8 +3,8 @@
  * Replaces your form select element for a html dropdown list which you can easily style with css.
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
- * Copyright (c) 2012 Bas van den Wijngaard
- * Version: 0.2.0
+ * Copyright (c) 2013 Bas van den Wijngaard
+ * Version: 0.2.1
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -33,7 +33,7 @@
 			//console.log(thisTagName);
 			if (thisTagName == 'option') {
 				var thisLabel = $(this).html();
-				if (mfsLabel == '' || $(this).attr('selected') == 'selected') {
+				if (mfsLabel == '' || $(this).is(':selected')) {
 					mfsLabel = thisLabel;
 				}
 				mfsOptionsHtml += '<li class="mfs-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
@@ -45,7 +45,7 @@
 				
 				$(this).find('option').each(function(){
 					var thisLabel = $(this).html();
-					if (mfsLabel == '' || $(this).attr('selected') == 'selected') {
+					if (mfsLabel == '' || $(this).is(':selected')) {
 						mfsLabel = thisLabel;
 					}
 					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
@@ -119,7 +119,7 @@
 			$(this).closest('li').addClass('selected');
 			selectedOption.html($(this).text()+'<span>&nbsp;</span>');
 			selectElmOptions.removeAttr('selected');
-			selectElmOptions.eq($(this).attr('index')).attr('selected', 'selected');
+			selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
 			optionList.hide();
 			
 			// Make a refresh function that just updates the select magic (destroy and re-enable)

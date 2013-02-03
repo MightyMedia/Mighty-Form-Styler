@@ -1,14 +1,14 @@
 {
   "name": "mfs",
   "title": "jQuery Mighty Form Styler",
-  "description": "Mighty Form Styler jQuery plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.",
+  "description": "jQuery Mighty Form Styler plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.",
 	"keywords": [
 		"form",
 		"formfields",
 		"replacement",
 		"ui"
 	],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Bas van den Wijngaard",
     "url": "http://www.binkje.nl"
