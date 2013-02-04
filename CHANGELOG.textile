@@ -1,3 +1,7 @@
+h1. 0.2.1 / 2013-02-03
+
+* Fixed compatibility issues with jQuery 1.9
+
 h1. 0.2.0 / 2013-01-21
 
 * Added support for optgroup options
