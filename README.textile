@@ -2,7 +2,7 @@ h1. Mighty Form Styler
 
 Mighty Form Styler jQuery plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.
 
-Version 0.2.1
+Version 0.2.2
 
 Requires jQuery 1.7 or newer.
 
@@ -34,6 +34,10 @@ bc. $('form').mfs('refresh');
 h3. Remove
 
 bc. $('form').mfs('destroy');
+
+h2. Demo
+
+You can preview a live demo at: http://www.binkje.nl/mfs
 
 h2. Issues
 

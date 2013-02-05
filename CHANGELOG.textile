@@ -1,3 +1,8 @@
+h1. 0.2.2 / 2013-02-05
+
+* Fixed issue: It is possible to initialize the mfs selector twice for the same select element
+* Fixed issue: The selected options doesn't get the class selected after initialization
+
 h1. 0.2.1 / 2013-02-03
 
 * Fixed compatibility issues with jQuery 1.9

@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.1
+ * Version: 0.2.2
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -32,11 +32,15 @@
 			var thisTagName = $(this).get(0).tagName.toLowerCase();
 			//console.log(thisTagName);
 			if (thisTagName == 'option') {
+				var thisActiveClass = '';
 				var thisLabel = $(this).html();
 				if (mfsLabel == '' || $(this).is(':selected')) {
 					mfsLabel = thisLabel;
+					if ($(this).is(':selected')) {
+						thisActiveClass = ' selected';
+					}
 				}
-				mfsOptionsHtml += '<li class="mfs-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+				mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
 				indexCount++;
 			}
 			if (thisTagName == 'optgroup') {
@@ -44,11 +48,15 @@
 				mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
 				
 				$(this).find('option').each(function(){
+					var thisActiveClass = '';
 					var thisLabel = $(this).html();
 					if (mfsLabel == '' || $(this).is(':selected')) {
 						mfsLabel = thisLabel;
+						if ($(this).is(':selected')) {
+							thisActiveClass = ' selected';
+						}
 					}
-					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
 					indexCount++;
 				});
 				
@@ -67,6 +75,7 @@
 	var destroySelect = function (theContainer)
 	{
 		var selectElm = theContainer.find('select');
+		selectElm.removeClass('mfs-enabled');
 		theContainer.before(selectElm);
 		theContainer.remove();
 	}
@@ -139,6 +148,8 @@
 			optionListLi.removeClass('active');
 			$(this).addClass('active');
 		});
+		
+		selectElm.addClass('mfs-enabled');
 	};
 	
 	var enableRefreshSelect = function (theContainer)
@@ -174,7 +185,9 @@
 				if (selects.length > 0) {
 					selects.each(function(){
 						var thisSelect = $(this);
-						createSelect(thisSelect);			
+						if (!thisSelect.hasClass('mfs-enabled')) {
+							createSelect(thisSelect);
+						}
 					});
 				}
 				// Maby later extend the plugin to style radio and checkbox inputs
