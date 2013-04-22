@@ -1,3 +1,7 @@
+h1. 0.2.3 / 2013-04-22
+
+* Updated jQuery version used in demo to 2.0.0
+
 h1. 0.2.2 / 2013-02-05
 
 * Fixed issue: It is possible to initialize the mfs selector twice for the same select element
