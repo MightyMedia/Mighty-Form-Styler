@@ -15,7 +15,7 @@
  *        $('#myForm').mfs('destroy'); - Removes the magic from your form
  *
  * options = {
- * 				'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- HTML to use in the handle (i.e. fontawesome icons)
+ * 				'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
  *				}
  */
 (function( $ ){
@@ -70,7 +70,7 @@
 		});
 		
 		if (settings['dropdownHandle'] !== false) {
-			mfsHandle = '';
+			mfsHandle = settings['dropdownHandle'];
 		}
 		
 		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
@@ -139,7 +139,7 @@
 			$(this).closest('li').addClass('selected');
 			mfsHandle = '&nbsp;';
 			if (settings['dropdownHandle'] !== false) {
-				mfsHandle = '';
+				mfsHandle = settings['dropdownHandle'];
 			}
 			selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
 			selectElmOptions.removeAttr('selected');
