@@ -4,19 +4,23 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.3
+ * Version: 0.2.4b
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
  * Requires jQuery 1.7 or later
  * 
- * Usage: $('#myForm').mfs(options);   - Enables the magic for your form
+ * Usage: $('#myForm').mfs(options);   - Enables the magic for your form, see available options below
  *        $('#myForm').mfs('refresh'); - Refreshes the styled selects (e.g. when you updated the select via ajax)
  *        $('#myForm').mfs('destroy'); - Removes the magic from your form
  *
+ * options = {
+ * 				'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- HTML to use in the handle (i.e. fontawesome icons)
+ *				}
  */
 (function( $ ){
 	var mfsSelectOpen = false;
+	var settings = false;
 	
 	var createSelect = function (thisSelect)
 	{
@@ -25,6 +29,7 @@
 		thisSelect.appendTo(mfsContainer);
 		
 		var mfsLabel = '';
+		var mfsHandle = '&nbsp;';
 		var mfsHtml = '';
 		var mfsOptionsHtml = '';
 		var indexCount = 0;
@@ -64,7 +69,11 @@
 			}
 		});
 		
-		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>&nbsp;</span></a>';
+		if (settings['dropdownHandle'] !== false) {
+			mfsHandle = '';
+		}
+		
+		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
 		mfsHtml += '<ul class="mfs-options">'+mfsOptionsHtml+'</ul>';
 		
 		mfsContainer.prepend(mfsHtml);
@@ -124,9 +133,15 @@
 		});
 		
 		optionListOptions.click(function(){
+			
+			
 			optionListLi.removeClass('active').removeClass('selected');
 			$(this).closest('li').addClass('selected');
-			selectedOption.html($(this).text()+'<span>&nbsp;</span>');
+			mfsHandle = '&nbsp;';
+			if (settings['dropdownHandle'] !== false) {
+				mfsHandle = '';
+			}
+			selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
 			selectElmOptions.removeAttr('selected');
 			selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
 			optionList.hide();
@@ -172,10 +187,11 @@
 		init : function( options ) 
 		{
 			// Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
-			var settings = $.extend( {
+			settings = $.extend( {
 				'refresh'         : true,
 				'radio' 					: false,
-				'checkbox'				: false
+				'checkbox'				: false,
+				'dropdownHandle'	: false
 			}, options);
 			
 			this.each(function() {
