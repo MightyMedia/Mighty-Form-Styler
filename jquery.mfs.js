@@ -15,7 +15,7 @@
  *        $('#myForm').mfs('destroy'); - Removes the magic from your form
  *
  * options = {
- *            'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
+ *            'dropdownHandle' : '<i class="icon-chevron-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
  *           }
  */
 
@@ -24,82 +24,8 @@
 	var settings = false;
 	var searchTimer = false;
 	var searchString = '';
-	
-	var createSelect = function (thisSelect)
-	{
-		thisSelect.after('<div class="mfs-container"></div>');
-		var mfsContainer = thisSelect.next('div.mfs-container');
-		thisSelect.appendTo(mfsContainer);
-		
-		var mfsLabel = '';
-		var mfsHandle = '&nbsp;';
-		var mfsHtml = '';
-		var mfsOptionsHtml = '';
-		var indexCount = 0;
-		thisSelect.find('> option, optgroup').each(function(){
-			var thisTagName = $(this).get(0).tagName.toLowerCase();
-			if (thisTagName == 'option') {
-				var thisActiveClass = '';
-				var thisLabel = $(this).html();
-				if (mfsLabel === '' || $(this).is(':selected')) {
-					mfsLabel = thisLabel;
-					if ($(this).is(':selected')) {
-						thisActiveClass = ' selected';
-					}
-				}
-				mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
-				indexCount++;
-			}
-			if (thisTagName == 'optgroup') {
-				var optGroupLabel = $(this).attr('label');
-				mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
-				
-				$(this).find('option').each(function(){
-					var thisActiveClass = '';
-					var thisLabel = $(this).html();
-					if (mfsLabel === '' || $(this).is(':selected')) {
-						mfsLabel = thisLabel;
-						if ($(this).is(':selected')) {
-							thisActiveClass = ' selected';
-						}
-					}
-					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
-					indexCount++;
-				});
-				
-				mfsOptionsHtml += mfsOptGroupHtml;
-			}
-		});
-		
-		if (settings.dropdownHandle !== false) {
-			mfsHandle = settings.dropdownHandle;
-		}
-		
-		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
-		mfsHtml += '<ul class="mfs-options">'+mfsOptionsHtml+'</ul>';
-		
-		mfsContainer.prepend(mfsHtml);
-		enableMagic(mfsContainer);
-	};
-	
-	// Destroy the magic for the select in this container
-	var destroySelect = function (theContainer)
-	{
-		var selectElm = theContainer.find('select');
-		selectElm.removeClass('mfs-enabled');
-		theContainer.before(selectElm);
-		theContainer.remove();
-	};
-	
-	// Refresh the magic for the select in this container
-	var refreshSelect = function (theContainer)
-	{
-		var selectElm = theContainer.find('select');
-		theContainer.before(selectElm);
-		theContainer.remove();
-		createSelect(selectElm);
-	};
-	
+	var mfsHandle = '&nbsp;';
+
 	// Enable the javascript magic for the mfs container
 	var enableMagic = function (theContainer) 
 	{
@@ -172,6 +98,83 @@
 		selectElm.addClass('mfs-enabled');
 	};
 	
+	// Create select
+	var createSelect = function (thisSelect)
+	{
+		thisSelect.after('<div class="mfs-container"></div>');
+		var mfsContainer = thisSelect.next('div.mfs-container');
+		thisSelect.appendTo(mfsContainer);
+		
+		var mfsLabel = '';
+		var mfsHtml = '';
+		var mfsOptionsHtml = '';
+		var indexCount = 0;
+		thisSelect.find('> option, optgroup').each(function(){
+			var thisTagName = $(this).get(0).tagName.toLowerCase();
+			if (thisTagName == 'option') {
+				var thisActiveClass = '';
+				var thisLabel = $(this).html();
+				if (mfsLabel === '' || $(this).is(':selected')) {
+					mfsLabel = thisLabel;
+					if ($(this).is(':selected')) {
+						thisActiveClass = ' selected';
+					}
+				}
+				mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+				indexCount++;
+			}
+			if (thisTagName == 'optgroup') {
+				var optGroupLabel = $(this).attr('label');
+				var mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
+				
+				$(this).find('option').each(function(){
+					var thisActiveClass = '';
+					var thisLabel = $(this).html();
+					if (mfsLabel === '' || $(this).is(':selected')) {
+						mfsLabel = thisLabel;
+						if ($(this).is(':selected')) {
+							thisActiveClass = ' selected';
+						}
+					}
+					mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
+					indexCount++;
+				});
+				
+				mfsOptionsHtml += mfsOptGroupHtml;
+			}
+		});
+		
+		if (settings.dropdownHandle !== false) {
+			mfsHandle = settings.dropdownHandle;
+		}
+		
+		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
+		mfsHtml += '<ul class="mfs-options">'+mfsOptionsHtml+'</ul>';
+		
+		mfsContainer.prepend(mfsHtml);
+		enableMagic(mfsContainer);
+	};
+	
+	// Destroy the magic for the select in this container
+	var destroySelect = function (theContainer)
+	{
+		var selectElm = theContainer.find('select');
+		selectElm.removeClass('mfs-enabled');
+		theContainer.before(selectElm);
+		theContainer.remove();
+	};
+	
+	// Refresh the magic for the select in this container
+	var refreshSelect = function (theContainer)
+	{
+		var selectElm = theContainer.find('select');
+		theContainer.before(selectElm);
+		theContainer.remove();
+		createSelect(selectElm);
+	};
+	
+/*
+	// Temporarily disabled because it isn't used yet
 	var enableRefreshSelect = function (theContainer)
 	{
 		var selectElm = theContainer.find('select');
@@ -187,6 +190,7 @@
 			createSelect(selectElm);
 		});
 	};
+*/
 	
 	var searchOption = function (keyCode)
 	{
