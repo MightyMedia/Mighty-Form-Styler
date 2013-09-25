@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.5
+ * Version: 0.2.6
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -277,6 +277,7 @@
 					}
 				}
 				else if (mfsSelectOpen !== false && keyDown != 37 && keyDown != 39 && keyDown != 16 && keyDown != 17 && keyDown != 18 && keyDown != 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
+					event.preventDefault();
 					searchOption(keyDown);
 				}
 			});
