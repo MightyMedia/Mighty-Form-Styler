@@ -6,13 +6,14 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Mighty Form Styler 0.2.3</title>
+  <title>Mighty Form Styler 0.2.4</title>
   <meta name="description" content="">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <form>
+	<h1>Examples</h1>
 	<ul>
 		<li>
 			<label for="simple-select">Simple select</label>
@@ -40,10 +41,25 @@
 			</select>
 		</li>
 	</ul>
+	
+	
+	<ul>
+		<li>
+			<label for="carbrands">Car brands</label>
+			<select id="carbrands" name="simple-select">
+				<option value="ford">Ford</option>
+				<option value="mercedes">Mercedes</option>
+				<option value="peugeot">Peugeot</option>
+				<option value="volkswagen">Volkswagen</option>
+				<option value="volvo">Volvo</option>
+			</select>
+		</li>
+	</ul>
+	
 </form>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="../jquery.mfs.js"></script>
+<script src="../jquery.mfs.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$('form').mfs();

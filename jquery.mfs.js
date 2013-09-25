@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.4b
+ * Version: 0.2.4
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -18,9 +18,12 @@
  *            'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
  *           }
  */
+
 (function( $ ){
 	var mfsSelectOpen = false;
 	var settings = false;
+	var searchTimer = false;
+	var searchString = '';
 	
 	var createSelect = function (thisSelect)
 	{
@@ -35,11 +38,10 @@
 		var indexCount = 0;
 		thisSelect.find('> option, optgroup').each(function(){
 			var thisTagName = $(this).get(0).tagName.toLowerCase();
-			//console.log(thisTagName);
 			if (thisTagName == 'option') {
 				var thisActiveClass = '';
 				var thisLabel = $(this).html();
-				if (mfsLabel == '' || $(this).is(':selected')) {
+				if (mfsLabel === '' || $(this).is(':selected')) {
 					mfsLabel = thisLabel;
 					if ($(this).is(':selected')) {
 						thisActiveClass = ' selected';
@@ -55,7 +57,7 @@
 				$(this).find('option').each(function(){
 					var thisActiveClass = '';
 					var thisLabel = $(this).html();
-					if (mfsLabel == '' || $(this).is(':selected')) {
+					if (mfsLabel === '' || $(this).is(':selected')) {
 						mfsLabel = thisLabel;
 						if ($(this).is(':selected')) {
 							thisActiveClass = ' selected';
@@ -69,8 +71,8 @@
 			}
 		});
 		
-		if (settings['dropdownHandle'] !== false) {
-			mfsHandle = settings['dropdownHandle'];
+		if (settings.dropdownHandle !== false) {
+			mfsHandle = settings.dropdownHandle;
 		}
 		
 		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
@@ -78,7 +80,7 @@
 		
 		mfsContainer.prepend(mfsHtml);
 		enableMagic(mfsContainer);
-	}
+	};
 	
 	// Destroy the magic for the select in this container
 	var destroySelect = function (theContainer)
@@ -87,7 +89,7 @@
 		selectElm.removeClass('mfs-enabled');
 		theContainer.before(selectElm);
 		theContainer.remove();
-	}
+	};
 	
 	// Refresh the magic for the select in this container
 	var refreshSelect = function (theContainer)
@@ -96,7 +98,7 @@
 		theContainer.before(selectElm);
 		theContainer.remove();
 		createSelect(selectElm);
-	}
+	};
 	
 	// Enable the javascript magic for the mfs container
 	var enableMagic = function (theContainer) 
@@ -109,11 +111,14 @@
 		var optionListOptions = optionList.find('a');
 		
 		optionList.hide();
+		mfsSelectOpen = false;
+		searchString = '';
 		selectedOption.click(function(){
 			var optionListAll = $('ul.mfs-options');
 			if (optionList.is(':visible')) {
 				optionList.hide();
-				mfsSelectOpen = true;
+				mfsSelectOpen = false;
+				searchString = '';
 			}
 			else {
 				optionListLi.removeClass('active');
@@ -133,18 +138,18 @@
 		});
 		
 		optionListOptions.click(function(){
-			
-			
 			optionListLi.removeClass('active').removeClass('selected');
 			$(this).closest('li').addClass('selected');
 			mfsHandle = '&nbsp;';
-			if (settings['dropdownHandle'] !== false) {
-				mfsHandle = settings['dropdownHandle'];
+			if (settings.dropdownHandle !== false) {
+				mfsHandle = settings.dropdownHandle;
 			}
 			selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
 			selectElmOptions.removeAttr('selected');
 			selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
 			optionList.hide();
+			mfsSelectOpen = false;
+			searchString = '';
 			
 			// Make a refresh function that just updates the select magic (destroy and re-enable)
 			if (selectElm.selectedIndex != $(this).attr('index') && selectElm.onchange) { 
@@ -181,15 +186,36 @@
 			theContainer.remove();
 			createSelect(selectElm);
 		});
-	}
+	};
+	
+	var searchOption = function (keyCode)
+	{
+		if (searchTimer !== false) {
+			clearTimeout(searchTimer);
+		}
+		searchTimer = setTimeout(function(){searchString = '';},1000);
+		var pressedChar = String.fromCharCode(keyCode);
+		searchString += String(pressedChar);
+		
+		var foundOption = mfsSelectOpen.find("a:mfssearch('"+searchString+"')").filter(':first');
+		
+		if (foundOption.length > 0) {
+			mfsSelectOpen.find('li.active').removeClass('active');
+			foundOption.closest('li').addClass('active');
+		}
+/*
+		console.log(keyCode+':'+pressedChar+' - '+searchString);
+		console.log(foundOption);
+*/
+	};
 	
 	var methods = {
 		init : function( options ) 
 		{
 			// Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
 			settings = $.extend( {
-				'refresh'         : true,
-				'radio' 					: false,
+				'refresh'					: true,
+				'radio'						: false,
 				'checkbox'				: false,
 				'dropdownHandle'	: false
 			}, options);
@@ -212,16 +238,19 @@
 			// Make the select hide when clicking outside it
 			$(window).click(function(){
 				$('ul.mfs-options').hide();
+				mfsSelectOpen = false;
+				searchString = '';
 			});
 			
 			// Make the new select behave more like a real one
 			$(document).keydown(function(event) {
-				var keyDown = event.keyCode
+				var keyDown = event.keyCode;
 				if (mfsSelectOpen !== false && (keyDown == 13 || keyDown == 38 || keyDown == 40 || keyDown == 27)) {
 					var activeOption = mfsSelectOpen.find('li.mfs-option.active');
+					var newActiveOption = false;
 					if (keyDown == 38) { // up
 						event.preventDefault();
-						var newActiveOption = activeOption.prevAll('.mfs-option:first');
+						newActiveOption = activeOption.prevAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
@@ -229,24 +258,29 @@
 					}
 					else if (keyDown == 40) { // down
 						event.preventDefault();
-						var newActiveOption = activeOption.nextAll('.mfs-option:first');
+						newActiveOption = activeOption.nextAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
 						}
 					}
-					else if (keyDown == 13) {
+					else if (keyDown == 13) { // Enter
 						activeOption.find('a').click();
 					}
-					else if (keyDown == 27) {
+					else if (keyDown == 27) { // Escape
 						$('ul.mfs-options').hide();
+						mfsSelectOpen = false;
 					}
+				}
+				else if (mfsSelectOpen !== false && keyDown != 37 && keyDown != 39 && keyDown != 16 && keyDown != 17 && keyDown != 18 && keyDown != 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
+					searchOption(keyDown);
 				}
 			});
 		},
 		refresh : function() 
 		{
 			mfsSelectOpen = false;
+			searchString = '';
 			this.each(function(){
 				var containers = $(this).find('div.mfs-container');
 				if (containers.length > 0) {
@@ -261,6 +295,7 @@
 		{
 			// Kill all the magic! Styling is a CSS thingie, and not for javascript!
 			mfsSelectOpen = false;
+			searchString = '';
 			this.each(function(){
 				var containers = $(this).find('div.mfs-container');
 				if (containers.length > 0) {
@@ -283,7 +318,7 @@
 		} else {
 			$.error( 'Method ' +  method + ' does not exist on jQuery.mfs' );
 		}
-	}
+	};
 })( jQuery );
 
 
@@ -295,13 +330,13 @@
  *
  */
 $.extend($.expr[":"], {
-	"mcontains": function(elem, i, match, array) {
+	"mfscontains": function(elem, i, match, array) {
 		return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
 	}
 });
 
 $.extend($.expr[":"], {
-	"msearch": function(elem, i, match, array) {
+	"mfssearch": function(elem, i, match, array) {
 		var searchString	= match[3].toLowerCase();
 		var searchLength	= searchString.length;
 		return (elem.textContent || elem.innerText || "").toLowerCase().substr(0, searchLength) == searchString;
