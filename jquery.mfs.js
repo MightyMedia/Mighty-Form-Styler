@@ -15,8 +15,8 @@
  *        $('#myForm').mfs('destroy'); - Removes the magic from your form
  *
  * options = {
- * 				'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
- *				}
+ *            'dropdownHandle' : '<i class="icon-arrow-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
+ *           }
  */
 (function( $ ){
 	var mfsSelectOpen = false;
@@ -285,3 +285,25 @@
 		}
 	}
 })( jQuery );
+
+
+/*
+ * Supportive selectors to enable extra mfs functionality
+ *
+ * :mfscontains('string') selector, case insensitive :contains() selector
+ * :mfsseach('string') selector, case insensitive search for textContent or innerText starting with given string
+ *
+ */
+$.extend($.expr[":"], {
+	"mcontains": function(elem, i, match, array) {
+		return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+	}
+});
+
+$.extend($.expr[":"], {
+	"msearch": function(elem, i, match, array) {
+		var searchString	= match[3].toLowerCase();
+		var searchLength	= searchString.length;
+		return (elem.textContent || elem.innerText || "").toLowerCase().substr(0, searchLength) == searchString;
+	}
+});
