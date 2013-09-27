@@ -27,7 +27,7 @@
 	var mfsHandle = '&nbsp;';
 
 	// Enable the javascript magic for the mfs container
-	var enableMagic = function (theContainer) 
+	var enableMagic = function (theContainer)
 	{
 		var selectElm = theContainer.find('select');
 		var selectElmOptions = selectElm.find('option');
@@ -78,11 +78,11 @@
 			searchString = '';
 			
 			// Make a refresh function that just updates the select magic (destroy and re-enable)
-			if (selectElm.selectedIndex != $(this).attr('index') && selectElm.onchange) { 
+			if (selectElm.selectedIndex !== $(this).attr('index') && selectElm.onchange) {
 				selectElm.selectedIndex = $(this).attr('index');
-				selectElm.onchange(); 
+				selectElm.onchange();
 			}
-			if (selectElm.selectedIndex != $(this).attr('index')) {
+			if (selectElm.selectedIndex !== $(this).attr('index')) {
 				selectElm.selectedIndex = $(this).attr('index');
 				selectElm.trigger('change');
 			}
@@ -111,7 +111,7 @@
 		var indexCount = 0;
 		thisSelect.find('> option, optgroup').each(function(){
 			var thisTagName = $(this).get(0).tagName.toLowerCase();
-			if (thisTagName == 'option') {
+			if (thisTagName === 'option') {
 				var thisActiveClass = '';
 				var thisLabel = $(this).html();
 				if (mfsLabel === '' || $(this).is(':selected')) {
@@ -123,7 +123,7 @@
 				mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'">'+thisLabel+'</a></li>';
 				indexCount++;
 			}
-			if (thisTagName == 'optgroup') {
+			if (thisTagName === 'optgroup') {
 				var optGroupLabel = $(this).attr('label');
 				var mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
 				
@@ -214,7 +214,7 @@
 	};
 	
 	var methods = {
-		init : function( options ) 
+		init : function( options )
 		{
 			// Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
 			settings = $.extend( {
@@ -249,10 +249,10 @@
 			// Make the new select behave more like a real one
 			$(document).keydown(function(event) {
 				var keyDown = event.keyCode;
-				if (mfsSelectOpen !== false && (keyDown == 13 || keyDown == 38 || keyDown == 40 || keyDown == 27)) {
+				if (mfsSelectOpen !== false && (keyDown === 13 || keyDown === 38 || keyDown === 40 || keyDown === 27)) {
 					var activeOption = mfsSelectOpen.find('li.mfs-option.active');
 					var newActiveOption = false;
-					if (keyDown == 38) { // up
+					if (keyDown === 38) { // up
 						event.preventDefault();
 						newActiveOption = activeOption.prevAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
@@ -260,7 +260,7 @@
 							activeOption.removeClass('active');
 						}
 					}
-					else if (keyDown == 40) { // down
+					else if (keyDown === 40) { // down
 						event.preventDefault();
 						newActiveOption = activeOption.nextAll('.mfs-option:first');
 						if (newActiveOption.length > 0) {
@@ -268,21 +268,21 @@
 							activeOption.removeClass('active');
 						}
 					}
-					else if (keyDown == 13) { // Enter
+					else if (keyDown === 13) { // Enter
 						activeOption.find('a').click();
 					}
-					else if (keyDown == 27) { // Escape
+					else if (keyDown === 27) { // Escape
 						$('ul.mfs-options').hide();
 						mfsSelectOpen = false;
 					}
 				}
-				else if (mfsSelectOpen !== false && keyDown != 37 && keyDown != 39 && keyDown != 16 && keyDown != 17 && keyDown != 18 && keyDown != 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
+				else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
 					event.preventDefault();
 					searchOption(keyDown);
 				}
 			});
 		},
-		refresh : function() 
+		refresh : function()
 		{
 			mfsSelectOpen = false;
 			searchString = '';
@@ -291,12 +291,12 @@
 				if (containers.length > 0) {
 					containers.each(function(){
 						var thisContainers = $(this);
-						refreshSelect(thisContainers);			
+						refreshSelect(thisContainers);
 					});
 				}
 			});
 		},
-		destroy : function() 
+		destroy : function()
 		{
 			// Kill all the magic! Styling is a CSS thingie, and not for javascript!
 			mfsSelectOpen = false;
@@ -306,7 +306,7 @@
 				if (containers.length > 0) {
 					containers.each(function(){
 						var thisContainers = $(this);
-						destroySelect(thisContainers);			
+						destroySelect(thisContainers);
 					});
 				}
 			});
@@ -335,15 +335,15 @@
  *
  */
 $.extend($.expr[":"], {
-	"mfscontains": function(elem, i, match, array) {
+	"mfscontains": function(elem, i, match/* , array */) {
 		return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
 	}
 });
 
 $.extend($.expr[":"], {
-	"mfssearch": function(elem, i, match, array) {
+	"mfssearch": function(elem, i, match/* , array */) {
 		var searchString	= match[3].toLowerCase();
 		var searchLength	= searchString.length;
-		return (elem.textContent || elem.innerText || "").toLowerCase().substr(0, searchLength) == searchString;
+		return (elem.textContent || elem.innerText || "").toLowerCase().substr(0, searchLength) === searchString;
 	}
 });
