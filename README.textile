@@ -53,4 +53,4 @@ You can preview a live demo at: http://www.binkje.nl/mfs
 
 h2. Issues
 
-If you have any ideas or bugs, please submit them to the GitHub issue tracker at https://github.com/basvandenwijngaard/Mighty-Form-Styler/issues.
+If you have any ideas or bugs, please submit them to the GitHub issue tracker at https://github.com/MightyMedia/Mighty-Form-Styler/issues.
