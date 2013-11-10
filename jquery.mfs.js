@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.6
+ * Version: 0.2.7
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -17,6 +17,7 @@
  * options = {
  *            'dropdownHandle' : '<i class="icon-chevron-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
  *           }
+ *
  */
 
 (function( $ ){
@@ -247,7 +248,8 @@
 			});
 			
 			// Make the new select behave more like a real one
-			$(document).keydown(function(event) {
+			$(document).off('keydown.mfs');
+			$(document).on('keydown.mfs', function(event) {
 				var keyDown = event.keyCode;
 				if (mfsSelectOpen !== false && (keyDown === 13 || keyDown === 38 || keyDown === 40 || keyDown === 27)) {
 					var activeOption = mfsSelectOpen.find('li.mfs-option.active');

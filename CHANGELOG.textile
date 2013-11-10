@@ -1,3 +1,7 @@
+h1. 0.2.7 / 2013-11-10
+
+* Fixed issue #8: Keyboard navigation breaks when initiating mfs more than once.
+
 h1. 0.2.6 / 2013-09-25
 
 * Fixed bug with searching for option while typing
