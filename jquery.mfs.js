@@ -208,10 +208,6 @@
 			mfsSelectOpen.find('li.active').removeClass('active');
 			foundOption.closest('li').addClass('active');
 		}
-/*
-		console.log(keyCode+':'+pressedChar+' - '+searchString);
-		console.log(foundOption);
-*/
 	};
 	
 	var methods = {
