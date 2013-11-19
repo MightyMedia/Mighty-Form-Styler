@@ -110,6 +110,8 @@
 		var mfsHtml = '';
 		var mfsOptionsHtml = '';
 		var indexCount = 0;
+		var mfsUlStyle = '';
+		
 		thisSelect.find('> option, optgroup').each(function(){
 			var thisTagName = $(this).get(0).tagName.toLowerCase();
 			if (thisTagName === 'option') {
@@ -148,9 +150,12 @@
 		if (settings.dropdownHandle !== false) {
 			mfsHandle = settings.dropdownHandle;
 		}
+		if (settings.enableScroll === true) {
+			mfsUlStyle = 'style="overflow-y:auto;max-height:'+settings.maxHeight+'px"';
+		}
 		
 		mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
-		mfsHtml += '<ul class="mfs-options">'+mfsOptionsHtml+'</ul>';
+		mfsHtml += '<ul class="mfs-options"'+mfsUlStyle+'>'+mfsOptionsHtml+'</ul>';
 		
 		mfsContainer.prepend(mfsHtml);
 		enableMagic(mfsContainer);
@@ -218,7 +223,9 @@
 				'refresh'					: true,
 				'radio'						: false,
 				'checkbox'				: false,
-				'dropdownHandle'	: false
+				'dropdownHandle'	: false,
+				'enableScroll'		: false,
+				'maxHeight'				: 200
 			}, options);
 			
 			this.each(function() {
