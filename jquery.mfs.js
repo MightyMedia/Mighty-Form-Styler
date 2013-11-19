@@ -58,6 +58,11 @@
 				else {
 					optionList.find('li.mfs-option:first-child').addClass('active');
 				}
+				if (settings.enableScroll === true) {
+					var activeElm = optionList.find('li.mfs-option.active');
+					var activeElmPos = activeElm.position();
+					optionList.scrollTop(activeElmPos.top);
+				}
 				mfsSelectOpen = optionList;
 			}
 			$(this).blur();
@@ -179,24 +184,6 @@
 		createSelect(selectElm);
 	};
 	
-/*
-	// Temporarily disabled because it isn't used yet
-	var enableRefreshSelect = function (theContainer)
-	{
-		var selectElm = theContainer.find('select');
-		var selectElmOptions = selectElm.find('option');
-		var selectedOption = theContainer.find('a.mfs-selected-option');
-		var optionList = theContainer.find('ul.mfs-options');
-		var optionListLi = optionList.find('li');
-		var optionListOptions = optionList.find('a');
-		
-		selectElm.on('change.mfsEnableRefresh',function(){
-			theContainer.before(selectElm);
-			theContainer.remove();
-			createSelect(selectElm);
-		});
-	};
-*/
 	
 	var searchOption = function (keyCode)
 	{
