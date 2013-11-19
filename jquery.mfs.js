@@ -59,9 +59,12 @@
 					optionList.find('li.mfs-option:first-child').addClass('active');
 				}
 				if (settings.enableScroll === true) {
+					scrollToActiveOption(optionList);
+/*
 					var activeElm = optionList.find('li.mfs-option.active');
 					var activeElmPos = activeElm.position();
 					optionList.scrollTop(activeElmPos.top);
+*/
 				}
 				mfsSelectOpen = optionList;
 			}
@@ -199,8 +202,27 @@
 		if (foundOption.length > 0) {
 			mfsSelectOpen.find('li.active').removeClass('active');
 			foundOption.closest('li').addClass('active');
+			scrollToActiveOption(mfsSelectOpen);
 		}
 	};
+	
+	var scrollToActiveOption = function (openMfsList)
+	{
+		if (settings.enableScroll === true) {
+			var activeElm = openMfsList.find('li.mfs-option.active');
+			var activeElmHeight = activeElm.height();
+			var activeElmPos = activeElm.position();
+			var activeElmOffset = activeElm.offset();
+			var openMfsListHeight = openMfsList.height();
+
+			if (activeElmPos.top > (settings.maxHeight-24)) {
+				openMfsList.scrollTop(openMfsList.scrollTop() + activeElmOffset.top - openMfsList.offset().top - (openMfsListHeight - activeElmHeight) + 5);
+			}
+			else if (activeElmPos.top < 5) {
+				openMfsList.scrollTop(openMfsList.scrollTop() + activeElmOffset.top - openMfsList.offset().top - 5);
+			}
+		}
+	}
 	
 	var methods = {
 		init : function( options )
@@ -250,6 +272,7 @@
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
+							scrollToActiveOption(mfsSelectOpen);
 						}
 					}
 					else if (keyDown === 40) { // down
@@ -258,6 +281,7 @@
 						if (newActiveOption.length > 0) {
 							newActiveOption.addClass('active');
 							activeOption.removeClass('active');
+							scrollToActiveOption(mfsSelectOpen);
 						}
 					}
 					else if (keyDown === 13) { // Enter
@@ -266,7 +290,7 @@
 					else if (keyDown === 27) { // Escape
 						$('ul.mfs-options').hide();
 						mfsSelectOpen = false;
-					}
+					} 
 				}
 				else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
 					event.preventDefault();
