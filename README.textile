@@ -37,16 +37,31 @@ bc. $('form').mfs('destroy');
 
 h2. Options
 
-At this point here is only one option available. There will be more in the future.
+At this point there are three optiona available.
 
 h3. dropdownHandle
 
 Add text or HTML in the dropdown handle (the little arrow down). For example, when you want to use fontawesome icons in the handle.
 
 bc. $('form').mfs({
-	'dropdownHandle': '<i class="icon-chevron-down"></i>',
-	'enableScroll'		: false, // Set to true to enable scrolling in dropdown list
-	'maxHeight'				: 200 // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
+	'dropdownHandle': '<i class="icon-chevron-down"></i>'
+});
+
+h3. enableScroll
+
+Enable a scrollbar in the dropdown list, as default this is set to _false_.
+
+bc. $('form').mfs({
+	'enableScroll' : true
+});
+
+h3. maxHeight
+
+Set the max height in pixels for the dropdown list, as default this is set to _200_. The setting *enableScroll* needs to be set to _true_ for this setting to have effect.
+
+bc. $('form').mfs({
+	'enableScroll' : true,
+	'maxHeight'    : 150
 });
 
 h2. Demo
