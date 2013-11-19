@@ -1,3 +1,7 @@
+h1. 1.0 / 2013-11-19
+
+* Enabled scrolling on dropdown list (issue #2, #4, #5)
+
 h1. 0.2.7 / 2013-11-10
 
 * Fixed issue #8: Keyboard navigation breaks when initiating mfs more than once.

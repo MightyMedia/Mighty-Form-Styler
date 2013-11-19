@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 0.2.7
+ * Version: 1.0
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -15,7 +15,9 @@
  *        $('#myForm').mfs('destroy'); - Removes the magic from your form
  *
  * options = {
- *            'dropdownHandle' : '<i class="icon-chevron-down"></i>' //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
+ *            'dropdownHandle'	: '<i class="icon-chevron-down"></i>', //	- Alternative HTML to use in the handle (i.e. fontawesome icons)
+ *						'enableScroll'		: false, // Set to true to enable scrolling in dropdown list
+ *						'maxHeight'				: 200 // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
  *           }
  *
  */
@@ -60,11 +62,6 @@
 				}
 				if (settings.enableScroll === true) {
 					scrollToActiveOption(optionList);
-/*
-					var activeElm = optionList.find('li.mfs-option.active');
-					var activeElmPos = activeElm.position();
-					optionList.scrollTop(activeElmPos.top);
-*/
 				}
 				mfsSelectOpen = optionList;
 			}
@@ -222,7 +219,7 @@
 				openMfsList.scrollTop(openMfsList.scrollTop() + activeElmOffset.top - openMfsList.offset().top - 5);
 			}
 		}
-	}
+	};
 	
 	var methods = {
 		init : function( options )
@@ -290,7 +287,7 @@
 					else if (keyDown === 27) { // Escape
 						$('ul.mfs-options').hide();
 						mfsSelectOpen = false;
-					} 
+					}
 				}
 				else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
 					event.preventDefault();
@@ -341,7 +338,6 @@
 		}
 	};
 })( jQuery );
-
 
 /*
  * Supportive selectors to enable extra mfs functionality

@@ -6,16 +6,30 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>jQuery Mighty Form Styler 0.2.5 demo</title>
+  <title>jQuery Mighty Form Styler demo</title>
   <meta name="description" content="jQuery Mighty Form Styler demo">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-
 <h1>Examples</h1>
 
-<form id="autootjes">	
+<form>	
+	<ul>
+		<li>
+			<label for="carbrands">Not activated</label>
+			<select id="carbrands" name="simple-select">
+				<option value="ford">Ford</option>
+				<option value="mercedes">Mercedes</option>
+				<option value="peugeot">Peugeot</option>
+				<option value="volkswagen">Volkswagen</option>
+				<option value="volvo">Volvo</option>
+			</select>
+		</li>
+	</ul>
+</form>
+
+<form class="default">	
 	<ul>
 		<li>
 			<label for="carbrands">Car brands</label>
@@ -30,7 +44,7 @@
 	</ul>
 </form>
 
-<form>
+<form class="default">
 	<ul>
 		<li>
 			<label>Select with optgroup</label>
@@ -52,16 +66,42 @@
 	</ul>
 </form>
 
+<form class="withscroll">
+	<ul>
+		<li>
+			<label>Select with enableScroll: true and maxHeight: 150</label>
+			<select id="optgroup-select" name="group-select">
+				<option value="opt0">option 0</option>
+				<option value="opt1">option 1</option>
+				<option value="opt2">option 2</option>
+				<option value="opt3">option 3</option>
+				<option value="opt4">option 4</option>
+				<option value="opt5">option 5</option>
+				<option value="opt6">option 6</option>
+				<option value="opt7" selected="selected">option 7</option>
+				<option value="opt8">option 8</option>
+				<option value="opt9">option 9</option>
+				<option value="opt10">option 10</option>
+				<option value="opt11">option 11</option>
+				<option value="opt12">option 12</option>
+				<option value="opt13">option 13</option>
+			</select>
+		</li>
+	</ul>
+</form>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="../jquery.mfs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('form').mfs();
-/*
-		$('form').mfs({
-			'dropdownHandle': '<i class="icon-chevron-down"></i>'
+
+		$('form.default').mfs();
+		
+		$('form.withscroll').mfs({
+			'enableScroll': true,
+			'maxHeight': 150
 		});
-*/
+		
 	});
 </script>
 
