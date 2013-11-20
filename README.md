@@ -1,4 +1,4 @@
-h1. Mighty Form Styler
+# Mighty Form Styler
 
 Mighty Form Styler jQuery plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.
 
@@ -9,65 +9,79 @@ Requires jQuery 1.7 or newer.
 Licensed under:
 MIT License - http://www.binkje.nl/mfs/license/
 
-h2. Requirements
+## Requirements
 
 * jQuery 1.7+
 
-h2. Installation
+## Installation
 
 To use Mighty Form Styler make sure you have jQuery 1.7 or newer. Next, add jquery.mfs.min.js to your webpage.
 
-bc. <script type="text/javascript" src="jquery.mfs.min.js"></script>
+```
+<script type="text/javascript" src="jquery.mfs.min.js"></script>
+```
 
-h2. Basic usage
+## Basic usage
 
-h3. Initialize
+### Initialize
 
-bc. $(document).ready(function(){
-	$('form').mfs();
+```javascript
+$(document).ready(function(){
+    $('form').mfs();
 });
-	
-h3. Refresh (e.g. when you updated the values via ajax)
+```
 
-bc. $('form').mfs('refresh');
-	
-h3. Remove
+### Refresh (e.g. when you updated the values via ajax)
 
-bc. $('form').mfs('destroy');
+```javascript
+$('form').mfs('refresh');
+```
 
-h2. Options
+### Remove
+
+```javascript
+$('form').mfs('destroy');
+```
+
+## Options
 
 At this point there are three optiona available.
 
-h3. dropdownHandle
+### dropdownHandle
 
 Add text or HTML in the dropdown handle (the little arrow down). For example, when you want to use fontawesome icons in the handle.
 
-bc. $('form').mfs({
-	'dropdownHandle': '<i class="icon-chevron-down"></i>'
+```javascript
+$('form').mfs({
+    'dropdownHandle': '<i class="icon-chevron-down"></i>'
 });
+```
 
-h3. enableScroll
+### enableScroll
 
 Enable a scrollbar in the dropdown list, as default this is set to _false_.
 
-bc. $('form').mfs({
-	'enableScroll' : true
+```javascript
+$('form').mfs({
+    'enableScroll' : true
 });
+```
 
-h3. maxHeight
+### maxHeight
 
 Set the max height in pixels for the dropdown list, as default this is set to _200_. The setting *enableScroll* needs to be set to _true_ for this setting to have effect.
 
-bc. $('form').mfs({
-	'enableScroll' : true,
-	'maxHeight'    : 150
+```javascript
+$('form').mfs({
+    'enableScroll' : true,
+    'maxHeight'    : 150
 });
+```
 
-h2. Demo
+## Demo
 
 You can preview a live demo at: http://www.binkje.nl/mfs
 
-h2. Issues
+## Issues
 
 If you have any ideas or bugs, please submit them to the GitHub issue tracker at https://github.com/MightyMedia/Mighty-Form-Styler/issues.

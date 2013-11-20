@@ -1,52 +1,54 @@
-h1. 1.0 / 2013-11-19
+# Changelog
+
+## 1.0 / 2013-11-19
 
 * Enabled scrolling on dropdown list (issue #2, #4, #5)
 
-h1. 0.2.7 / 2013-11-10
+## 0.2.7 / 2013-11-10
 
 * Fixed issue #8: Keyboard navigation breaks when initiating mfs more than once.
 
-h1. 0.2.6 / 2013-09-25
+## 0.2.6 / 2013-09-25
 
 * Fixed bug with searching for option while typing
 
-h1. 0.2.5 / 2013-09-25
+## 0.2.5 / 2013-09-25
 
 * Fixed documentation and stuff
 
-h1. 0.2.4 / 2013-09-25
+## 0.2.4 / 2013-09-25
 
 * Added dropdownHandle option
 * Added search for option while typing and dropdown is active 
 
-h1. 0.2.3 / 2013-04-22
+## 0.2.3 / 2013-04-22
 
 * Updated jQuery version used in demo to 2.0.0
 
-h1. 0.2.2 / 2013-02-05
+## 0.2.2 / 2013-02-05
 
 * Fixed issue: It is possible to initialize the mfs selector twice for the same select element
 * Fixed issue: The selected options doesn't get the class selected after initialization
 
-h1. 0.2.1 / 2013-02-03
+## 0.2.1 / 2013-02-03
 
 * Fixed compatibility issues with jQuery 1.9
 
-h1. 0.2.0 / 2013-01-21
+## 0.2.0 / 2013-01-21
 
 * Added support for optgroup options
 * Added better styled demo
 * Organized folders
 
-h1. 0.1.2 / 2012-12-23
+## 0.1.2 / 2012-12-23
 
 * Fixed active status on opening when there is already an selected option
 
-h1. 0.1.1 / 2012-12-20
+## 0.1.1 / 2012-12-20
 
 * Code cleanup
 * Added destroy and refresh function
 
-h1. 0.1 / 2012-12-18
+## 0.1 / 2012-12-18
 
 * Initial public beta release
