@@ -1,13 +1,13 @@
 # Mighty Form Styler
 
-Mighty Form Styler jQuery plugin replaces your form select element for a html dropdown list so you can easily and completely style it with css.
+jQuery Mighty Form Styler replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0
+Version 1.0.1
 
 Requires jQuery 1.7 or newer.
 
 Licensed under:
-MIT License - http://www.binkje.nl/mfs/license/
+MIT License - https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
 
 ## Requirements
 
@@ -17,7 +17,7 @@ MIT License - http://www.binkje.nl/mfs/license/
 
 To use Mighty Form Styler make sure you have jQuery 1.7 or newer. Next, add jquery.mfs.min.js to your webpage.
 
-```
+```html
 <script type="text/javascript" src="jquery.mfs.min.js"></script>
 ```
 
@@ -45,7 +45,7 @@ $('form').mfs('destroy');
 
 ## Options
 
-At this point there are three optiona available.
+At this point there are four options available.
 
 ### dropdownHandle
 
@@ -78,9 +78,19 @@ $('form').mfs({
 });
 ```
 
+### autoWidth
+
+Make dropdown list width adjust to widest option
+
+```javascript
+$('form').mfs({
+    'autoWidth' : true
+});
+```
+
 ## Demo
 
-You can preview a live demo at: http://www.binkje.nl/mfs
+You can preview a live demo at: http://www.binkje.nl/mfs/
 
 ## Issues
 

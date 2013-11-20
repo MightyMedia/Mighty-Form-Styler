@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 / 2013-11-21
+
+* Added autoWidth option (issue #3)
+
 ## 1.0 / 2013-11-19
 
 * Enabled scrolling on dropdown list (issue #2, #4, #5)
