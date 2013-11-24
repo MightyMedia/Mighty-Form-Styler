@@ -2,7 +2,7 @@
 
 jQuery Mighty Form Styler replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0.1
+Version 1.0.2
 
 Requires jQuery 1.7 or newer.
 
@@ -15,9 +15,10 @@ MIT License - https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICE
 
 ## Installation
 
-To use Mighty Form Styler make sure you have jQuery 1.7 or newer. Next, add jquery.mfs.min.js to your webpage.
+To use Mighty Form Styler make sure you have jQuery 1.7 or newer. Next, include the files jquery.mfs.css and jquery.mfs.min.js in your webpage. The css file contains some default styling for the select element.
 
 ```html
+<link rel="stylesheet" href="jquery.mfs.css">
 <script type="text/javascript" src="jquery.mfs.min.js"></script>
 ```
 

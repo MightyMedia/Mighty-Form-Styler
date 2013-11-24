@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 1.0.1
+ * Version: 1.0.2
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
