@@ -80,11 +80,21 @@ $('form').mfs({
 
 ### autoWidth
 
-Make dropdown list width adjust to widest option
+Make dropdown list width adjust to widest option.
 
 ```javascript
 $('form').mfs({
     'autoWidth' : true
+});
+```
+
+### disableTouch
+
+Use native select dropdown on mobile and touch devices.
+
+```javascript
+$('form').mfs({
+    'disableTouch' : true
 });
 ```
 

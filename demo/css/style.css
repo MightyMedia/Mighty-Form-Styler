@@ -13,7 +13,14 @@ label {
     font-family: Helvetica, Arial; 
     font-size: 12px;
 }
-.mfs-container select {display: none;}
+.mfs-container select {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+.mfs-container.notouch select {
+    display: none;
+}
 .mfs-options {
     position: absolute; 
     width: 100%; 

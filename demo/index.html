@@ -32,8 +32,23 @@
 <form class="default">	
     <ul>
         <li>
-            <label for="carbrands">Car brands</label>
+            <label for="carbrands">Default select without extra options</label>
             <select id="carbrands" name="simple-select">
+                <option value="ford">Ford</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="volvo">Volvo</option>
+            </select>
+        </li>
+    </ul>
+</form>
+
+<form class="disabletouch">	
+    <ul>
+        <li>
+            <label>Select with disableTouch set to true</label>
+            <select name="default-select">
                 <option value="ford">Ford</option>
                 <option value="mercedes">Mercedes</option>
                 <option value="peugeot">Peugeot</option>
@@ -104,6 +119,10 @@
         $('form.withscroll').mfs({
             'enableScroll': true,
             'maxHeight': 150
+        });
+        
+        $('form.disabletouch').mfs({
+            'disableTouch': true
         });
     
     });

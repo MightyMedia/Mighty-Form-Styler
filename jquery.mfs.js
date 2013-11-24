@@ -18,7 +18,8 @@
  *      'dropdownHandle': '<i class="icon-chevron-down"></i>', // - Alternative HTML to use in the handle (i.e. fontawesome icons)
  *      'enableScroll'  : false,    // Set to true to enable scrolling in dropdown list
  *      'maxHeight'     : 200,      // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
- *      'autoWidth'     : false     // Set to true to adjust dropdown list width to widest option
+ *      'autoWidth'     : false,    // Set to true to adjust dropdown list width to widest option
+ *      'disableTouch'  : false     // Set to true to use native select dropdown on mobile and touch devices
  *           }
  *
  */
@@ -29,6 +30,7 @@
     var searchTimer = false;
     var searchString = '';
     var mfsHandle = '&nbsp;';
+    var touchDevice = /Android|webOS|iPad|iPhone/i.test(navigator.userAgent);
     
     // Enable the javascript magic for the mfs container
     var enableMagic = function (theContainer)
@@ -43,32 +45,44 @@
         optionList.hide();
         mfsSelectOpen = false;
         searchString = '';
-        selectedOption.click(function(){
-            var optionListAll = $('ul.mfs-options');
-            if (optionList.is(':visible')) {
-                optionList.hide();
-                mfsSelectOpen = false;
-                searchString = '';
-            }
-            else {
-                optionListLi.removeClass('active');
-                optionListAll.hide();
-                optionList.show();
-                var optionListSelected = optionList.find('li.mfs-option.selected');
-                if (optionListSelected.length > 0) {
-                    optionListSelected.addClass('active');
+        
+        if (settings.disableTouch === true && touchDevice === true) {
+            selectedOption.click(function(){
+               selectElm.focus();
+               return false;
+            });
+            selectElm.change(function(){
+                refreshSelect(theContainer);
+            });
+        }
+        else {
+            selectedOption.click(function(){
+                var optionListAll = $('ul.mfs-options');
+                if (optionList.is(':visible')) {
+                    optionList.hide();
+                    mfsSelectOpen = false;
+                    searchString = '';
                 }
                 else {
-                    optionList.find('li.mfs-option:first-child').addClass('active');
+                    optionListLi.removeClass('active');
+                    optionListAll.hide();
+                    optionList.show();
+                    var optionListSelected = optionList.find('li.mfs-option.selected');
+                    if (optionListSelected.length > 0) {
+                        optionListSelected.addClass('active');
+                    }
+                    else {
+                        optionList.find('li.mfs-option:first-child').addClass('active');
+                    }
+                    if (settings.enableScroll === true) {
+                        scrollToActiveOption(optionList);
+                    }
+                    mfsSelectOpen = optionList;
                 }
-                if (settings.enableScroll === true) {
-                    scrollToActiveOption(optionList);
-                }
-                mfsSelectOpen = optionList;
-            }
-            $(this).blur();
-            return false;
-        });
+                $(this).blur();
+                return false;
+            });
+        }
         
         optionListOptions.click(function(){
             optionListLi.removeClass('active').removeClass('selected');
@@ -108,7 +122,12 @@
     // Create select
     var createSelect = function (thisSelect)
     {
-        thisSelect.after('<div class="mfs-container"></div>');
+        var touchClass = 'notouch';
+        if (settings.disableTouch === true && touchDevice === true) {
+            touchClass = '';
+        }
+        
+        thisSelect.after('<div class="mfs-container '+touchClass+'"></div>');
         var mfsContainer = thisSelect.next('div.mfs-container');
         thisSelect.appendTo(mfsContainer);
         
@@ -244,7 +263,8 @@
             'dropdownHandle': false,
             'enableScroll'  : false,
             'maxHeight'     : 200,
-            'autoWidth'     : false
+            'autoWidth'     : false,
+            'disableTouch'  : false
         }, options);
         
         this.each(function() {
