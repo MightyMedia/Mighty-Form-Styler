@@ -46,7 +46,7 @@ $('form').mfs('destroy');
 
 ## Options
 
-At this point there are four options available.
+The following options are available.
 
 ### dropdownHandle
 
