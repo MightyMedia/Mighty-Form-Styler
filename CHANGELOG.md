@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 / 2013-11-25
+
+* CSS fix to enable native select on Adroid devices (issue #9)
+
 ## 1.0.2 / 2013-11-24
 
 * Added disableTouch option to use native select options on mobile and touch devices (issue #9)
