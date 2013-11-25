@@ -10,8 +10,10 @@
 }
 .mfs-container select {
     position: absolute;
+    width: 100%;
     top: 0;
-    z-index: -1;
+    z-index: 1;
+    opacity: 0;
 }
 .mfs-container.notouch select {
     display: none;
