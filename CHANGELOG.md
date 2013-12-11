@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 / 2013-12-11
+
+* Minor changes to prevent issues with concatenated scripts and/or other plugins that are not closed properly
+
 ## 1.0.3 / 2013-11-25
 
 * CSS fix to enable native select on Adroid devices (issue #9)

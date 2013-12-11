@@ -9,10 +9,10 @@
         "ui",
         "formfields"
     ],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": {
         "name": "Bas van den Wijngaard",
-        "url": "http://www.binkje.nl/"
+        "url": "http://mightymedia.nl/"
     },
     "licenses": [
         {

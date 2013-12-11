@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 1.0.3
+ * Version: 1.0.4
  * Licensed under the MIT License:
  * http://www.binkje.nl/mfs/license
  *
@@ -24,7 +24,9 @@
  *
  */
 
-(function( $ ){
+;(function( $, window, document, undefined ){
+    'use_strict';
+    
     var mfsSelectOpen = false;
     var settings = false;
     var searchTimer = false;
@@ -215,7 +217,7 @@
         createSelect(selectElm);
     };
     
-    
+    // Search for option in the dropdown
     var searchOption = function (keyCode)
     {
         if (searchTimer !== false) {
@@ -234,6 +236,7 @@
         }
     };
     
+    // Scroll to the active option in the dropdown
     var scrollToActiveOption = function (openMfsList)
     {
         if (settings.enableScroll === true) {
@@ -253,81 +256,94 @@
     };
     
     var methods = {
-    init : function( options )
-    {
-        // Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
-        settings = $.extend( {
-            'refresh'       : true,
-            'radio'         : false,
-            'checkbox'      : false,
-            'dropdownHandle': false,
-            'enableScroll'  : false,
-            'maxHeight'     : 200,
-            'autoWidth'     : false,
-            'disableTouch'  : false
-        }, options);
-        
-        this.each(function() {
-            // Find all selects
-            var thisForm = $(this);
-            var selects = thisForm.find('select');
-            if (selects.length > 0) {
-                selects.each(function(){
-                    var thisSelect = $(this);
-                    if (!thisSelect.hasClass('mfs-enabled')) {
-                        createSelect(thisSelect);
+        // Initiate form element replacement
+        init : function( options )
+        {
+            // Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
+            settings = $.extend({}, {
+                'refresh'       : true,
+                'radio'         : false,
+                'checkbox'      : false,
+                'dropdownHandle': false,
+                'enableScroll'  : false,
+                'maxHeight'     : 200,
+                'autoWidth'     : false,
+                'disableTouch'  : false
+            }, options);
+            
+            this.each(function() {
+                // Find all selects
+                var thisForm = $(this);
+                if (!thisForm.hasClass('mfs-enabled')) {
+                    var selects = thisForm.find('select');
+                    if (selects.length > 0) {
+                        selects.each(function(){
+                            var thisSelect = $(this);
+                            if (!thisSelect.hasClass('mfs-enabled')) {
+                                if (thisSelect.attr('multiple')) {
+                                    // @TODO: create an multiple select replacement
+                                    createSelect(thisSelect);
+                                }
+                                else {
+                                    // Normal dropdown select
+                                    createSelect(thisSelect);
+                                }
+                            }
+                        });
                     }
-                });
-            }
-            // Maby later extend the plugin to style radio and checkbox inputs
-        });
-        
-        // Make the select hide when clicking outside it
-        $(window).click(function(){
-            $('ul.mfs-options').hide();
-            mfsSelectOpen = false;
-            searchString = '';
-        });
-        
-        // Make the new select behave more like a real one
-        $(document).off('keydown.mfs');
-        $(document).on('keydown.mfs', function(event) {
-            var keyDown = event.keyCode;
-            if (mfsSelectOpen !== false && (keyDown === 13 || keyDown === 38 || keyDown === 40 || keyDown === 27)) {
-                var activeOption = mfsSelectOpen.find('li.mfs-option.active');
-                var newActiveOption = false;
-                if (keyDown === 38) { // up
+                    // @TODO: Maby later extend the plugin to style radio and checkbox inputs
+                    thisForm.addClass('mfs-enabled');
+                }
+            });
+            
+            // Make the select hide when clicking outside it
+            $(window).click(function(){
+                $('ul.mfs-options').hide();
+                mfsSelectOpen = false;
+                searchString = '';
+            });
+            
+            // Make the new select behave more like a real one
+            $(document).off('keydown.mfs');
+            $(document).on('keydown.mfs', function(event) {
+                var keyDown = event.keyCode;
+                if (mfsSelectOpen !== false && (keyDown === 13 || keyDown === 38 || keyDown === 40 || keyDown === 27)) {
+                    var activeOption = mfsSelectOpen.find('li.mfs-option.active');
+                    var newActiveOption = false;
+                    if (keyDown === 38) { // up
+                        event.preventDefault();
+                        newActiveOption = activeOption.prevAll('.mfs-option:first');
+                        if (newActiveOption.length > 0) {
+                            newActiveOption.addClass('active');
+                            activeOption.removeClass('active');
+                            scrollToActiveOption(mfsSelectOpen);
+                        }
+                    }
+                    else if (keyDown === 40) { // down
+                        event.preventDefault();
+                        newActiveOption = activeOption.nextAll('.mfs-option:first');
+                        if (newActiveOption.length > 0) {
+                            newActiveOption.addClass('active');
+                            activeOption.removeClass('active');
+                            scrollToActiveOption(mfsSelectOpen);
+                        }
+                    }
+                    else if (keyDown === 13) { // Enter
+                        activeOption.find('a').click();
+                    }
+                    else if (keyDown === 27) { // Escape
+                        $('ul.mfs-options').hide();
+                        mfsSelectOpen = false;
+                    }
+                }
+                else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
                     event.preventDefault();
-                    newActiveOption = activeOption.prevAll('.mfs-option:first');
-                    if (newActiveOption.length > 0) {
-                        newActiveOption.addClass('active');
-                        activeOption.removeClass('active');
-                        scrollToActiveOption(mfsSelectOpen);
-                    }
+                    searchOption(keyDown);
                 }
-                else if (keyDown === 40) { // down
-                    event.preventDefault();
-                    newActiveOption = activeOption.nextAll('.mfs-option:first');
-                    if (newActiveOption.length > 0) {
-                        newActiveOption.addClass('active');
-                        activeOption.removeClass('active');
-                        scrollToActiveOption(mfsSelectOpen);
-                    }
-                }
-                else if (keyDown === 13) { // Enter
-                    activeOption.find('a').click();
-                }
-                else if (keyDown === 27) { // Escape
-                    $('ul.mfs-options').hide();
-                    mfsSelectOpen = false;
-                }
-            }
-            else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
-                event.preventDefault();
-                searchOption(keyDown);
-            }
-        });
-    },
+            });
+        },
+        
+        //Refresh the created replacement
         refresh : function()
         {
             mfsSelectOpen = false;
@@ -342,12 +358,15 @@
                 }
             });
         },
+        
+        // Destroy the created replacement and place back the original element
         destroy : function()
         {
             // Kill all the magic! Styling is a CSS thingie, and not for javascript!
             mfsSelectOpen = false;
             searchString = '';
             this.each(function(){
+                var thisForm = $(this);
                 var containers = $(this).find('div.mfs-container');
                 if (containers.length > 0) {
                     containers.each(function(){
@@ -355,13 +374,15 @@
                         destroySelect(thisContainers);
                     });
                 }
+                
+                thisForm.removeClass('mfs-enabled');
             });
         }
     };
-	
+    
+    // Method calling logic
     $.fn.mfs = function(method)
     {
-        // Method calling logic
         if ( methods[method] ) {
             return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {
@@ -370,7 +391,7 @@
             $.error( 'Method ' +  method + ' does not exist on jQuery.mfs' );
         }
     };
-})( jQuery );
+})( jQuery, window, document );
 
 /*
  * Supportive selectors to enable extra mfs functionality
@@ -380,15 +401,15 @@
  *
  */
 $.extend($.expr[":"], {
-    "mfscontains": function(elem, i, match/* , array */) {
+    "mfscontains": function(elem, i, match) {
         return (elem.textContent || elem.innerText || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
     }
 });
 
 $.extend($.expr[":"], {
-    "mfssearch": function(elem, i, match/* , array */) {
-        var searchString	= match[3].toLowerCase();
-        var searchLength	= searchString.length;
+    "mfssearch": function(elem, i, match) {
+        var searchString    = match[3].toLowerCase();
+        var searchLength    = searchString.length;
         return (elem.textContent || elem.innerText || "").toLowerCase().substr(0, searchLength) === searchString;
     }
 });

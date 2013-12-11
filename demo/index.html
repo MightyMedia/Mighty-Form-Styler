@@ -30,11 +30,26 @@
     </ul>
 </form>
 
+<form>	
+    <ul>
+        <li>
+            <label for="carbrands2">Not activated multi select</label>
+            <select id="carbrands2" name="multi-select" multiple>
+                <option value="ford">Ford</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="volvo">Volvo</option>
+            </select>
+        </li>
+    </ul>
+</form>
+
 <form class="default">	
     <ul>
         <li>
             <label for="carbrands">Default select without extra options</label>
-            <select id="carbrands" name="simple-select">
+            <select name="simple-select">
                 <option value="ford">Ford</option>
                 <option value="mercedes">Mercedes</option>
                 <option value="peugeot">Peugeot</option>
@@ -106,6 +121,21 @@
     </ul>
 </form>
 
+<form class="multiselect">	
+    <ul>
+        <li>
+            <label for="carbrands3">Multi select (not doing anything yet)</label>
+            <select id="carbrands3" name="multi-select" multiple>
+                <option value="ford">Ford</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="volvo">Volvo</option>
+            </select>
+        </li>
+    </ul>
+</form>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="../jquery.mfs.min.js"></script>
 <script type="text/javascript">
@@ -117,13 +147,15 @@
             'autoWidth': true
         });
         
-        $('form.withscroll').mfs({
-            'enableScroll': true,
-            'maxHeight': 150
-        });
-        
         $('form.disabletouch').mfs({
             'disableTouch': true
+        });
+        
+        $('form.multiselect').mfs();
+        
+        $('form.withscroll').mfs({
+            'maxHeight': 150,
+            'enableScroll': true
         });
     
     });
