@@ -12,6 +12,13 @@
     "version": "1.0.4",
     "author": {
         "name": "Bas van den Wijngaard",
+        "email": "bas@mightymedia.nl",
+        "url": "http://mightymedia.nl/"
+    },
+    "maintainers": [
+    {
+        "name": "Bas van den Wijngaard",
+        "email": "bas@mightymedia.nl",
         "url": "http://mightymedia.nl/"
     },
     "licenses": [
