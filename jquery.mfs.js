@@ -1,12 +1,12 @@
 /*
- * jQuery Mighty Form Styler plugin
+ * Mighty Form Styler for jQuery
  * Replaces your form select element for a html dropdown list which you can easily style with css.
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2013 Bas van den Wijngaard
  * Version: 1.0.4
  * Licensed under the MIT License:
- * http://www.binkje.nl/mfs/license
+ * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
  * Requires jQuery 1.7 or later
  * 
