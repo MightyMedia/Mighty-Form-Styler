@@ -27,22 +27,22 @@
 ;(function( $, window, document, undefined ){
     'use_strict';
     
-    var mfsSelectOpen = false;
-    var settings = false;
-    var searchTimer = false;
-    var searchString = '';
-    var mfsHandle = '&nbsp;';
-    var touchDevice = /Android|webOS|iPad|iPhone/i.test(navigator.userAgent);
+    var mfsSelectOpen   = false;
+    var settings        = false;
+    var searchTimer     = false;
+    var searchString    = '';
+    var mfsHandle       = '&nbsp;';
+    var touchDevice     = /Android|webOS|iPad|iPhone/i.test(navigator.userAgent);
     
     // Enable the javascript magic for the mfs container
-    var enableMagic = function (theContainer)
+    var enableMagic = function (theContainer,multiple)
     {
-        var selectElm = theContainer.find('select');
-        var selectElmOptions = selectElm.find('option');
-        var selectedOption = theContainer.find('a.mfs-selected-option');
-        var optionList = theContainer.find('ul.mfs-options');
-        var optionListLi = optionList.find('li.mfs-option');
-        var optionListOptions = optionList.find('a');
+        var selectElm           = theContainer.find('select');
+        var selectElmOptions    = selectElm.find('option');
+        var selectedOption      = theContainer.find('a.mfs-selected-option');
+        var optionList          = theContainer.find('ul.mfs-options');
+        var optionListLi        = optionList.find('li.mfs-option');
+        var optionListOptions   = optionList.find('a');
         
         optionList.hide();
         mfsSelectOpen = false;
@@ -87,15 +87,33 @@
         }
         
         optionListOptions.click(function(){
-            optionListLi.removeClass('active').removeClass('selected');
-            $(this).closest('li').addClass('selected');
             mfsHandle = '&nbsp;';
             if (settings.dropdownHandle !== false) {
                 mfsHandle = settings.dropdownHandle;
             }
-            selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
-            selectElmOptions.removeAttr('selected');
-            selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
+            
+            if (multiple === false) {
+                optionListLi.removeClass('active').removeClass('selected');
+                $(this).closest('li').addClass('selected');
+                selectElmOptions.removeAttr('selected');
+                selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
+                selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
+            }
+            else {
+                var thisLi = $(this).closest('li');
+                if (thisLi.hasClass('selected')) {
+                    thisLi.removeClass('selected');
+                    selectElmOptions.eq($(this).attr('index')).removeAttr('selected');
+                }
+                else {
+                    thisLi.addClass('selected');
+                    selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
+                }
+                
+                var selectedCount = selectElm.val().length;
+                selectedOption.html(selectedCount+' '+settings.multipleTitle+'<span>'+mfsHandle+'</span>');
+            }
+ 
             optionList.hide();
             mfsSelectOpen = false;
             searchString = '';
@@ -129,6 +147,11 @@
             touchClass = '';
         }
         
+        var multiple = false;
+        if (thisSelect.attr('multiple')) {
+            multiple = true;
+        }
+        
         thisSelect.after('<div class="mfs-container '+touchClass+'"></div>');
         var mfsContainer = thisSelect.next('div.mfs-container');
         thisSelect.appendTo(mfsContainer);
@@ -139,6 +162,11 @@
         var indexCount = 0;
         var mfsUlStyle = '';
         var mfsAStyle = '';
+        var selectedCount = 0;
+        
+        if (multiple === true) {
+            mfsLabel = '0 '+settings.multipleTitle;
+        }
         
         if (settings.autoWidth === true) {
             mfsAStyle = 'style="white-space: nowrap;"';
@@ -150,9 +178,15 @@
                 var thisActiveClass = '';
                 var thisLabel = $(this).html();
                 if (mfsLabel === '' || $(this).is(':selected')) {
-                    mfsLabel = thisLabel;
+                    if (multiple === false) {
+                        mfsLabel = thisLabel;
+                    }
                     if ($(this).is(':selected')) {
                         thisActiveClass = ' selected';
+                        selectedCount++;
+                        if (multiple === true) {
+                            mfsLabel = selectedCount+' '+settings.multipleTitle;
+                        }
                     }
                 }
                 mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
@@ -196,7 +230,7 @@
         mfsHtml += '<ul class="mfs-options"'+mfsUlStyle+'>'+mfsOptionsHtml+'</ul>';
         
         mfsContainer.prepend(mfsHtml);
-        enableMagic(mfsContainer);
+        enableMagic(mfsContainer,multiple);
     };
     
     // Destroy the magic for the select in this container
@@ -268,7 +302,8 @@
                 'enableScroll'  : false,
                 'maxHeight'     : 200,
                 'autoWidth'     : false,
-                'disableTouch'  : false
+                'disableTouch'  : false,
+                'multipleTitle' : 'selected'
             }, options);
             
             this.each(function() {
@@ -280,14 +315,7 @@
                         selects.each(function(){
                             var thisSelect = $(this);
                             if (!thisSelect.hasClass('mfs-enabled')) {
-                                if (thisSelect.attr('multiple')) {
-                                    // @TODO: create an multiple select replacement
-                                    createSelect(thisSelect);
-                                }
-                                else {
-                                    // Normal dropdown select
-                                    createSelect(thisSelect);
-                                }
+                                createSelect(thisSelect);
                             }
                         });
                     }
