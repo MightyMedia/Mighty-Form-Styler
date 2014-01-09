@@ -3,8 +3,8 @@
  * Replaces your form select element for a html dropdown list which you can easily style with css.
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
- * Copyright (c) 2013 Bas van den Wijngaard
- * Version: 1.0.4
+ * Copyright (c) 2012-2014 Bas van den Wijngaard
+ * Version: 1.0.5
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -16,10 +16,11 @@
  *
  * options = {
  *      'dropdownHandle': '<i class="icon-chevron-down"></i>', // - Alternative HTML to use in the handle (i.e. fontawesome icons)
- *      'enableScroll'  : false,    // Set to true to enable scrolling in dropdown list
- *      'maxHeight'     : 200,      // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
- *      'autoWidth'     : false,    // Set to true to adjust dropdown list width to widest option
- *      'disableTouch'  : false     // Set to true to use native select dropdown on mobile and touch devices
+ *      'enableScroll'  : false,        // Set to true to enable scrolling in dropdown list
+ *      'maxHeight'     : 200,          // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
+ *      'autoWidth'     : false,        // Set to true to adjust dropdown list width to widest option
+ *      'disableTouch'  : false         // Set to true to use native select dropdown on mobile and touch devices
+ *      'multipleTitle' : 'selected'    // Set the title used for the selected option 'x selected', defaults to 'selected'
  *           }
  *
  */

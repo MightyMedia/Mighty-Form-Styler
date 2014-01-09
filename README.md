@@ -2,7 +2,7 @@
 
 Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0.4
+Version 1.0.5
 
 Requires jQuery 1.7 or newer.
 
@@ -96,6 +96,16 @@ Use native select dropdown on mobile and touch devices.
 ```javascript
 $('form').mfs({
     'disableTouch' : true
+});
+```
+
+### multipleTitle
+
+Set the title used for the selected option ie 'x selected'.
+
+```javascript
+$('form').mfs({
+    'multipleTitle' : 'selected'
 });
 ```
 

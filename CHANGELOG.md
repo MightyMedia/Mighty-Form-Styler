@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 / 2014-01-09
+
+* Fixed issue #10: Make it work with the multiple attribute on a select element
+
 ## 1.0.4 / 2013-12-11
 
 * Minor changes to prevent issues with concatenated scripts and/or other plugins that are not closed properly
