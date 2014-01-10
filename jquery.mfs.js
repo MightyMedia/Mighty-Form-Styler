@@ -96,21 +96,23 @@
             }
             
             if (multiple === false) {
-                optionListLi.removeClass('active').removeClass('selected');
-                $(this).closest('li').addClass('selected');
                 selectElmOptions.removeAttr('selected');
                 selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
                 selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
+                
+                optionListLi.removeClass('active').removeClass('selected');
+                $(this).closest('li').addClass('selected');
+                
             }
             else {
                 var thisLi = $(this).closest('li');
                 if (thisLi.hasClass('selected')) {
-                    thisLi.removeClass('selected');
                     selectElmOptions.eq($(this).attr('index')).removeAttr('selected');
+                    thisLi.removeClass('selected');
                 }
                 else {
-                    thisLi.addClass('selected');
                     selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
+                    thisLi.addClass('selected');
                 }
                 
                 var selectedCount = 0;
@@ -137,6 +139,10 @@
             }
             if (selectElm.selectedIndex !== $(this).attr('index')) {
                 selectElm.selectedIndex = $(this).attr('index');
+                selectElm.trigger('change');
+            }
+            if (multiple === true) {
+                // Always trigger on change event when a multi select
                 selectElm.trigger('change');
             }
             
