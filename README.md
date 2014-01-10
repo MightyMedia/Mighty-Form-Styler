@@ -2,7 +2,9 @@
 
 Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0.5
+Version 1.0.6
+
+For changelog see: https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/CHANGELOG.md
 
 Requires jQuery 1.7 or newer.
 
@@ -101,11 +103,31 @@ $('form').mfs({
 
 ### multipleTitle
 
-Set the title used for the selected option ie 'x selected'.
+Set the title used for the selected option ie 'x selected'. This setting only has effect on select elements with the multiple attribute set.
 
 ```javascript
 $('form').mfs({
     'multipleTitle' : 'selected'
+});
+```
+
+### multipleTitleNone
+
+Set an alternative title used for the selected option when no options are selected. This setting only has effect on select elements with the multiple attribute set.
+
+```javascript
+$('form').mfs({
+    'multipleTitleNone' : 'Make a selection'
+});
+```
+
+### multipleAutoClose
+
+Set to false to keep a multi select open when selecting options. This setting only has effect on select elements with the multiple attribute set.
+
+```javascript
+$('form').mfs({
+    'multipleAutoClose' : false
 });
 ```
 

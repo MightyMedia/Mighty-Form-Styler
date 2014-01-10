@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.5
+ * Version: 1.0.6
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -15,12 +15,14 @@
  *        $('#myForm').mfs('destroy');  - Removes the magic from your form
  *
  * options = {
- *      'dropdownHandle': '<i class="icon-chevron-down"></i>', // - Alternative HTML to use in the handle (i.e. fontawesome icons)
- *      'enableScroll'  : false,        // Set to true to enable scrolling in dropdown list
- *      'maxHeight'     : 200,          // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
- *      'autoWidth'     : false,        // Set to true to adjust dropdown list width to widest option
- *      'disableTouch'  : false         // Set to true to use native select dropdown on mobile and touch devices
- *      'multipleTitle' : 'selected'    // Set the title used for the selected option 'x selected', defaults to 'selected'
+ *      'dropdownHandle'    : '<i class="icon-chevron-down"></i>', // - Alternative HTML to use in the handle (i.e. fontawesome icons)
+ *      'enableScroll'      : false,        // Set to true to enable scrolling in dropdown list
+ *      'maxHeight'         : 200,          // Set the max height for the dropdown list in pixels (enableScroll needs to be set to true)
+ *      'autoWidth'         : false,        // Set to true to adjust dropdown list width to widest option
+ *      'disableTouch'      : false         // Set to true to use native select dropdown on mobile and touch devices
+ *      'multipleTitle'     : 'selected'    // Set the title used for the selected option 'x selected', defaults to 'selected'
+ *      'multipleTitleNone  : false         // Set alternative title for selected option on multi selects when no options are selected
+ *      'mutlipleAutoClose  : true          // Set to false to keep a multi select open when selecting an option
  *           }
  *
  */
@@ -111,12 +113,21 @@
                     selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
                 }
                 
-                var selectedCount = selectElm.val().length;
-                selectedOption.html(selectedCount+' '+settings.multipleTitle+'<span>'+mfsHandle+'</span>');
+                var selectedCount = 0;
+                if (selectElm.val() !== null) {
+                    selectedCount = selectElm.val().length;
+                }
+                selectedOption.html('<strong class="count">'+selectedCount+'</strong> '+settings.multipleTitle+'<span>'+mfsHandle+'</span>');
+                if (settings.mutlipleTitleNone !== false && selectedCount === 0) {
+                    selectedOption.html(settings.mutlipleTitleNone+'<span>'+mfsHandle+'</span>');
+                }
             }
- 
-            optionList.hide();
-            mfsSelectOpen = false;
+            
+            if (settings.mutlipleAutoClose === true || multiple === false) {
+                optionList.hide();
+                mfsSelectOpen = false;
+            }
+            
             searchString = '';
             
             // Make a refresh function that just updates the select magic (destroy and re-enable)
@@ -166,7 +177,12 @@
         var selectedCount = 0;
         
         if (multiple === true) {
-            mfsLabel = '0 '+settings.multipleTitle;
+            if (settings.mutlipleTitleNone !== false) {
+                mfsLabel = settings.mutlipleTitleNone;
+            }
+            else {
+                mfsLabel = '<strong class="count">0</strong> '+settings.multipleTitle;
+            }
         }
         
         if (settings.autoWidth === true) {
@@ -186,7 +202,7 @@
                         thisActiveClass = ' selected';
                         selectedCount++;
                         if (multiple === true) {
-                            mfsLabel = selectedCount+' '+settings.multipleTitle;
+                            mfsLabel = '<strong class="count">'+selectedCount+'</strong> '+settings.multipleTitle;
                         }
                     }
                 }
@@ -296,15 +312,17 @@
         {
             // Unleash the magic! But actually, you shouldn't. Styling is a CSS thing.
             settings = $.extend({}, {
-                'refresh'       : true,
-                'radio'         : false,
-                'checkbox'      : false,
-                'dropdownHandle': false,
-                'enableScroll'  : false,
-                'maxHeight'     : 200,
-                'autoWidth'     : false,
-                'disableTouch'  : false,
-                'multipleTitle' : 'selected'
+                'refresh'           : true,
+                'radio'             : false,
+                'checkbox'          : false,
+                'dropdownHandle'    : false,
+                'enableScroll'      : false,
+                'maxHeight'         : 200,
+                'autoWidth'         : false,
+                'disableTouch'      : false,
+                'multipleTitle'     : 'selected',
+                'mutlipleTitleNone' : false,
+                'multipleAutoClose' : true
             }, options);
             
             this.each(function() {

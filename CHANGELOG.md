@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 / 2014-01-10
+
+* Added multipleTitleNone and multipleAutoClose config options for multi select elements
+
 ## 1.0.5 / 2014-01-09
 
 * Fixed issue #10: Make it work with the multiple attribute on a select element

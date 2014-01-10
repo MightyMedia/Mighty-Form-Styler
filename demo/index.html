@@ -137,10 +137,11 @@
 </form>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="../jquery.mfs.min.js"></script>
+<script src="../jquery.mfs.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     
+/*
         $('form.default').mfs();
         
         $('form.autowidth').mfs({
@@ -150,15 +151,20 @@
         $('form.disabletouch').mfs({
             'disableTouch': true
         });
+*/
         
-        $('form.multiselect').mfs({
-            'multipleTitle': 'geselecteerd'
-        });
+        $('form').mfs({
+            'multipleTitle'     : 'geselecteerd',
+            'mutlipleTitleNone' : 'Niks geselecteerd',
+            'multipleAutoClose' : false
+        });/*
+
         
         $('form.withscroll').mfs({
             'maxHeight': 150,
             'enableScroll': true
         });
+*/
     
     });
 </script>
