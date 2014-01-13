@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7 / 2014-01-13
+
+* Fixed refreshing selected values on touch devices
+
 ## 1.0.6 / 2014-01-10
 
 * Added multipleTitleNone and multipleAutoClose config options for multi select elements

@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.6
+ * Version: 1.0.7
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -56,7 +56,7 @@
                selectElm.focus();
                return false;
             });
-            selectElm.change(function(){
+            selectElm.blur(function(){
                 refreshSelect(theContainer);
             });
         }
