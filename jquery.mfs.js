@@ -331,23 +331,31 @@
                 'multipleAutoClose' : true
             }, options);
             
-            this.each(function() {
-                // Find all selects
-                var thisForm = $(this);
-                if (!thisForm.hasClass('mfs-enabled')) {
-                    var selects = thisForm.find('select');
-                    if (selects.length > 0) {
-                        selects.each(function(){
-                            var thisSelect = $(this);
-                            if (!thisSelect.hasClass('mfs-enabled')) {
-                                createSelect(thisSelect);
-                            }
-                        });
-                    }
-                    // @TODO: Maby later extend the plugin to style radio and checkbox inputs
-                    thisForm.addClass('mfs-enabled');
+            if (this.is("select")) {
+                var thisSelect = $(this);
+                if (!thisSelect.hasClass('mfs-enabled')) {
+                    createSelect(thisSelect);
                 }
-            });
+            }
+            else {
+                this.each(function() {
+                    // Find all selects
+                    var thisForm = $(this);
+                    if (!thisForm.hasClass('mfs-enabled')) {
+                        var selects = thisForm.find('select');
+                        if (selects.length > 0) {
+                            selects.each(function(){
+                                var thisSelect = $(this);
+                                if (!thisSelect.hasClass('mfs-enabled')) {
+                                    createSelect(thisSelect);
+                                }
+                            });
+                        }
+                        // @TODO: Maby later extend the plugin to style radio and checkbox inputs
+                        thisForm.addClass('mfs-enabled');
+                    }
+                });
+            }
             
             // Make the select hide when clicking outside it
             $(window).click(function(){
