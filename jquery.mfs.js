@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  * 
  * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.7
+ * Version: 1.0.8
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -410,6 +410,23 @@
             mfsSelectOpen = false;
             searchString = '';
             this.each(function(){
+                var thisSelects = $(this).find('select');
+                
+                if (thisSelects.length > 0) {
+                    thisSelects.each(function(){
+                        var thisSelect = $(this);
+                        var thisContainer = thisSelect.closest('div.mfs-container');
+                        
+                        if (!thisSelect.hasClass('mfs-enabled')) {
+                            createSelect(thisSelect);
+                        }
+                        else if (thisContainer.length > 0) {
+                            refreshSelect(thisContainer);
+                        }
+                    });
+                }
+
+/*
                 var containers = $(this).find('div.mfs-container');
                 if (containers.length > 0) {
                     containers.each(function(){
@@ -417,6 +434,8 @@
                         refreshSelect(thisContainers);
                     });
                 }
+*/                
+                
             });
         },
         
