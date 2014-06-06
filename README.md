@@ -2,7 +2,7 @@
 
 Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0.7
+Version 1.0.8
 
 For changelog see: https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/CHANGELOG.md
 

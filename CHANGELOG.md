@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8 / 2014-06-06
+
+* Fixed styling new (injected) select elements on refresh
+
 ## 1.0.7 / 2014-01-13
 
 * Fixed refreshing selected values on touch devices
