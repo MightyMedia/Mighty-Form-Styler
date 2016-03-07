@@ -2,14 +2,14 @@
  * Mighty Form Styler for jQuery
  * Replaces your form select element for a html dropdown list which you can easily style with css.
  * Examples and documentation at: http://www.binkje.nl/mfs
- * 
+ *
  * Copyright (c) 2012-2014 Bas van den Wijngaard
  * Version: 1.0.8
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
  * Requires jQuery 1.7 or later
- * 
+ *
  * Usage: $('#myForm').mfs(options);    - Enables the magic for your form, see available options below
  *        $('#myForm').mfs('refresh');  - Refreshes the styled selects (e.g. when you updated the select via ajax)
  *        $('#myForm').mfs('destroy');  - Removes the magic from your form
@@ -29,14 +29,14 @@
 
 ;(function( $, window, document, undefined ){
     'use_strict';
-    
+
     var mfsSelectOpen   = false;
     var settings        = false;
     var searchTimer     = false;
     var searchString    = '';
     var mfsHandle       = '&nbsp;';
     var touchDevice     = /Android|webOS|iPad|iPhone/i.test(navigator.userAgent);
-    
+
     // Enable the javascript magic for the mfs container
     var enableMagic = function (theContainer,multiple)
     {
@@ -46,11 +46,11 @@
         var optionList          = theContainer.find('ul.mfs-options');
         var optionListLi        = optionList.find('li.mfs-option');
         var optionListOptions   = optionList.find('a');
-        
+
         optionList.hide();
         mfsSelectOpen = false;
         searchString = '';
-        
+
         if (settings.disableTouch === true && touchDevice === true) {
             selectedOption.click(function(){
                selectElm.focus();
@@ -88,21 +88,21 @@
                 return false;
             });
         }
-        
+
         optionListOptions.click(function(){
             mfsHandle = '&nbsp;';
             if (settings.dropdownHandle !== false) {
                 mfsHandle = settings.dropdownHandle;
             }
-            
+
             if (multiple === false) {
                 selectElmOptions.removeAttr('selected');
                 selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
                 selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
-                
+
                 optionListLi.removeClass('active').removeClass('selected');
                 $(this).closest('li').addClass('selected');
-                
+
             }
             else {
                 var thisLi = $(this).closest('li');
@@ -114,7 +114,7 @@
                     selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
                     thisLi.addClass('selected');
                 }
-                
+
                 var selectedCount = 0;
                 if (selectElm.val() !== null) {
                     selectedCount = selectElm.val().length;
@@ -124,14 +124,14 @@
                     selectedOption.html(settings.mutlipleTitleNone+'<span>'+mfsHandle+'</span>');
                 }
             }
-            
+
             if (settings.mutlipleAutoClose === true || multiple === false) {
                 optionList.hide();
                 mfsSelectOpen = false;
             }
-            
+
             searchString = '';
-            
+
             // Make a refresh function that just updates the select magic (destroy and re-enable)
             if (selectElm.selectedIndex !== $(this).attr('index') && selectElm.onchange) {
                 selectElm.selectedIndex = $(this).attr('index');
@@ -145,18 +145,18 @@
                 // Always trigger on change event when a multi select
                 selectElm.trigger('change');
             }
-            
+
             return false;
         });
-        
+
         optionListLi.mouseover(function(){
             optionListLi.removeClass('active');
             $(this).addClass('active');
         });
-        
+
         selectElm.addClass('mfs-enabled');
     };
-    
+
     // Create select
     var createSelect = function (thisSelect)
     {
@@ -164,16 +164,16 @@
         if (settings.disableTouch === true && touchDevice === true) {
             touchClass = '';
         }
-        
+
         var multiple = false;
         if (thisSelect.attr('multiple')) {
             multiple = true;
         }
-        
+
         thisSelect.after('<div class="mfs-container '+touchClass+'"></div>');
         var mfsContainer = thisSelect.next('div.mfs-container');
         thisSelect.appendTo(mfsContainer);
-        
+
         var mfsLabel = '';
         var mfsHtml = '';
         var mfsOptionsHtml = '';
@@ -181,7 +181,7 @@
         var mfsUlStyle = '';
         var mfsAStyle = '';
         var selectedCount = 0;
-        
+
         if (multiple === true) {
             if (settings.mutlipleTitleNone !== false) {
                 mfsLabel = settings.mutlipleTitleNone;
@@ -190,11 +190,11 @@
                 mfsLabel = '<strong class="count">0</strong> '+settings.multipleTitle;
             }
         }
-        
+
         if (settings.autoWidth === true) {
             mfsAStyle = 'style="white-space: nowrap;"';
         }
-        
+
         thisSelect.find('> option, optgroup').each(function(){
             var thisTagName = $(this).get(0).tagName.toLowerCase();
             if (thisTagName === 'option') {
@@ -218,7 +218,7 @@
             if (thisTagName === 'optgroup') {
                 var optGroupLabel = $(this).attr('label');
                 var mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
-                
+
                 $(this).find('option').each(function(){
                     var thisActiveClass = '';
                     var thisLabel = $(this).html();
@@ -231,11 +231,11 @@
                     mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
                     indexCount++;
                 });
-                
+
                 mfsOptionsHtml += mfsOptGroupHtml;
             }
         });
-        
+
         if (settings.dropdownHandle !== false) {
             mfsHandle = settings.dropdownHandle;
         }
@@ -248,14 +248,14 @@
         if (mfsUlStyle.length > 0) {
             mfsUlStyle = 'style="'+mfsUlStyle+'"';
         }
-        
+
         mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
         mfsHtml += '<ul class="mfs-options"'+mfsUlStyle+'>'+mfsOptionsHtml+'</ul>';
-        
+
         mfsContainer.prepend(mfsHtml);
         enableMagic(mfsContainer,multiple);
     };
-    
+
     // Destroy the magic for the select in this container
     var destroySelect = function (theContainer)
     {
@@ -264,7 +264,7 @@
         theContainer.before(selectElm);
         theContainer.remove();
     };
-    
+
     // Refresh the magic for the select in this container
     var refreshSelect = function (theContainer)
     {
@@ -273,7 +273,7 @@
         theContainer.remove();
         createSelect(selectElm);
     };
-    
+
     // Search for option in the dropdown
     var searchOption = function (keyCode)
     {
@@ -283,16 +283,16 @@
         searchTimer = setTimeout(function(){searchString = '';},1000);
         var pressedChar = String.fromCharCode(keyCode);
         searchString += String(pressedChar);
-        
+
         var foundOption = mfsSelectOpen.find("a:mfssearch('"+searchString+"')").filter(':first');
-        
+
         if (foundOption.length > 0) {
             mfsSelectOpen.find('li.active').removeClass('active');
             foundOption.closest('li').addClass('active');
             scrollToActiveOption(mfsSelectOpen);
         }
     };
-    
+
     // Scroll to the active option in the dropdown
     var scrollToActiveOption = function (openMfsList)
     {
@@ -302,7 +302,7 @@
             var activeElmPos = activeElm.position();
             var activeElmOffset = activeElm.offset();
             var openMfsListHeight = openMfsList.height();
-            
+
             if (activeElmPos.top > (settings.maxHeight-24)) {
                 openMfsList.scrollTop(openMfsList.scrollTop() + activeElmOffset.top - openMfsList.offset().top - (openMfsListHeight - activeElmHeight) + 5);
             }
@@ -311,7 +311,7 @@
             }
         }
     };
-    
+
     var methods = {
         // Initiate form element replacement
         init : function( options )
@@ -330,7 +330,7 @@
                 'mutlipleTitleNone' : false,
                 'multipleAutoClose' : true
             }, options);
-            
+
             if (this.is("select")) {
                 var thisSelect = $(this);
                 if (!thisSelect.hasClass('mfs-enabled')) {
@@ -356,14 +356,14 @@
                     }
                 });
             }
-            
+
             // Make the select hide when clicking outside it
             $(window).click(function(){
                 $('ul.mfs-options').hide();
                 mfsSelectOpen = false;
                 searchString = '';
             });
-            
+
             // Make the new select behave more like a real one
             $(document).off('keydown.mfs');
             $(document).on('keydown.mfs', function(event) {
@@ -397,13 +397,13 @@
                         mfsSelectOpen = false;
                     }
                 }
-                else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd 
+                else if (mfsSelectOpen !== false && keyDown !== 37 && keyDown !== 39 && keyDown !== 16 && keyDown !== 17 && keyDown !== 18 && keyDown !== 91) { // Ignore left and right arrows, shift, ctrl, alt, cmd
                     event.preventDefault();
                     searchOption(keyDown);
                 }
             });
         },
-        
+
         //Refresh the created replacement
         refresh : function()
         {
@@ -411,12 +411,12 @@
             searchString = '';
             this.each(function(){
                 var thisSelects = $(this).find('select');
-                
+
                 if (thisSelects.length > 0) {
                     thisSelects.each(function(){
                         var thisSelect = $(this);
                         var thisContainer = thisSelect.closest('div.mfs-container');
-                        
+
                         if (!thisSelect.hasClass('mfs-enabled')) {
                             createSelect(thisSelect);
                         }
@@ -434,11 +434,11 @@
                         refreshSelect(thisContainers);
                     });
                 }
-*/                
-                
+*/
+
             });
         },
-        
+
         // Destroy the created replacement and place back the original element
         destroy : function()
         {
@@ -454,12 +454,12 @@
                         destroySelect(thisContainers);
                     });
                 }
-                
+
                 thisForm.removeClass('mfs-enabled');
             });
         }
     };
-    
+
     // Method calling logic
     $.fn.mfs = function(method)
     {
