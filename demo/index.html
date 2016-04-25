@@ -15,11 +15,11 @@
 
 <h1>Examples</h1>
 
-<form>	
+<form>
     <ul>
         <li>
             <label for="carbrands">Not activated</label>
-            <select id="carbrands" name="simple-select">
+            <select id="carbrands" name="simple-select" class="nope">
                 <option value="ford">Ford</option>
                 <option value="mercedes">Mercedes</option>
                 <option value="peugeot">Peugeot</option>
@@ -30,11 +30,11 @@
     </ul>
 </form>
 
-<form>	
+<form>
     <ul>
         <li>
             <label for="carbrands2">Not activated multi select</label>
-            <select id="carbrands2" name="multi-select" multiple>
+            <select id="carbrands2" name="multi-select" class="nope" multiple>
                 <option value="ford">Ford</option>
                 <option value="mercedes">Mercedes</option>
                 <option value="peugeot">Peugeot</option>
@@ -45,7 +45,7 @@
     </ul>
 </form>
 
-<form class="default">	
+<form class="default">
     <ul>
         <li>
             <label for="carbrands">Default select without extra options</label>
@@ -60,7 +60,7 @@
     </ul>
 </form>
 
-<form class="disabletouch">	
+<form class="disabletouch">
     <ul>
         <li>
             <label>Select with disableTouch set to true</label>
@@ -121,10 +121,10 @@
     </ul>
 </form>
 
-<form class="multiselect">	
+<form class="multiselect">
     <ul>
         <li>
-            <label for="carbrands3">Multi select (not doing anything yet)</label>
+            <label for="carbrands3">Multi select</label>
             <select id="carbrands3" name="multi-select" multiple>
                 <option value="ford">Ford</option>
                 <option value="mercedes">Mercedes</option>
@@ -136,37 +136,53 @@
     </ul>
 </form>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<form>
+    <ul>
+        <li>
+            <label for="carbrands4">Empty first value</label>
+            <select id="carbrands4" name="select-with-empty-first-value" data-alt-title="Select model">
+                <option value="" selected>Reset model</option>
+                <option value="ford">Ford</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="volvo">Volvo</option>
+            </select>
+        </li>
+    </ul>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="../jquery.mfs.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-    
+
 /*
         $('form.default').mfs();
-        
+
         $('form.autowidth').mfs({
             'autoWidth': true
         });
-        
+
         $('form.disabletouch').mfs({
             'disableTouch': true
         });
 */
-        
-        $('form.multiselect').mfs({
-            'disableTouch': true,
+
+        $('form').mfs({
+            'disableTouch'      : true,
             'multipleTitle'     : 'geselecteerd',
             'mutlipleTitleNone' : 'Niks geselecteerd',
-            'multipleAutoClose' : false
+            'multipleAutoClose' : false,
+            'skipClasses'       : 'nope'
         });/*
 
-        
         $('form.withscroll').mfs({
             'maxHeight': 150,
             'enableScroll': true
         });
 */
-    
+
     });
 </script>
 

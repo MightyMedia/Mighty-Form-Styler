@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9 / 2016-04-25
+
+* Added an optional alternative title when the selected value is an empty string - issue #18
+
 ## 1.0.8 / 2014-06-06
 
 * Fixed styling new (injected) select elements on refresh

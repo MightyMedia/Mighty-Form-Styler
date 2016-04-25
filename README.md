@@ -2,7 +2,7 @@
 
 Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.
 
-Version 1.0.8
+Version 1.0.9
 
 For changelog see: https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/CHANGELOG.md
 
@@ -130,6 +130,19 @@ $('form').mfs({
     'multipleAutoClose' : false
 });
 ```
+
+### alternative title when selected value is an empty string
+
+This can be usefull when you don't use a label for you element but you want the first option to be something like 'Reset filter' and you don't want that value being displayed on de select field. See issue #18.
+
+```html
+<select name="my-select" data-alt-title="Select option">
+    <option value="">Reset filter</option>
+    <option value="opt1">Option 1</option>
+    <option value="opt2">Option 2</option>
+</select>
+```
+
 
 ## Demo
 
