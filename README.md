@@ -133,7 +133,7 @@ $('form').mfs({
 
 ### alternative title when selected value is an empty string
 
-This can be usefull when you don't use a label for you element but you want the first option to be something like 'Reset filter' and you don't want that value being displayed on de select field. See issue #18.
+This can be useful when you don't use a label for you element but you want the first option to be something like 'Reset filter' and you don't want that value being displayed on de select field. See issue #18.
 
 ```html
 <select name="my-select" data-alt-title="Select option">
