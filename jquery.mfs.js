@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  *
  * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.9
+ * Version: 1.0.10
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -56,6 +56,7 @@
         }
 
         optionList.hide();
+        theContainer.removeClass('mfs-container-active');
         mfsSelectOpen = false;
         searchString = '';
 
@@ -73,6 +74,7 @@
                 var optionListAll = $('ul.mfs-options');
                 if (optionList.is(':visible')) {
                     optionList.hide();
+                    theContainer.removeClass('mfs-container-active');
                     mfsSelectOpen = false;
                     searchString = '';
                 }
@@ -80,6 +82,7 @@
                     optionListLi.removeClass('active');
                     optionListAll.hide();
                     optionList.show();
+                    theContainer.addClass('mfs-container-active');
                     var optionListSelected = optionList.find('li.mfs-option.selected');
                     if (optionListSelected.length > 0) {
                         optionListSelected.addClass('active');
@@ -143,6 +146,7 @@
             if (settings.mutlipleAutoClose === true || multiple === false) {
                 optionList.hide();
                 mfsSelectOpen = false;
+                theContainer.removeClass('mfs-container-active');
             }
 
             searchString = '';
@@ -413,6 +417,7 @@
                 $('ul.mfs-options').hide();
                 mfsSelectOpen = false;
                 searchString = '';
+                $('.mfs-container').removeClass('mfs-container-active');
             });
 
             // Make the new select behave more like a real one
@@ -445,6 +450,7 @@
                     }
                     else if (keyDown === 27) { // Escape
                         $('ul.mfs-options').hide();
+                        $('.mfs-container').removeClass('mfs-container-active');
                         mfsSelectOpen = false;
                     }
                 }

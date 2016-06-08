@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.10 / 2016-06-06
+
+* Added active class to container when dropdown is open/active - issue #19
+
 ## 1.0.9 / 2016-04-25
 
 * Added an optional alternative title when the selected value is an empty string - issue #18
