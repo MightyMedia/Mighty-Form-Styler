@@ -1,194 +1,180 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Mighty Form Styler for jQuery : Mighty Form Styler for jQuery replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element." />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Mighty Form Styler for jQuery</title>
+    <meta charset="UTF-8">
+    <title>Mighty Form Styler for jQuery by MightyMedia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Mighty Form Styler for jQuery</h1>
+      <h2 class="project-tagline">Mighty Form Styler for jQuery replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.</h2>
+      <a href="https://github.com/MightyMedia/Mighty-Form-Styler" class="btn">View on GitHub</a>
+      <a href="https://github.com/MightyMedia/Mighty-Form-Styler/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/MightyMedia/Mighty-Form-Styler/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/MightyMedia/Mighty-Form-Styler">View on GitHub</a>
-
-          <h1 id="project_title">Mighty Form Styler for jQuery</h1>
-          <h2 id="project_tagline">Mighty Form Styler for jQuery replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/MightyMedia/Mighty-Form-Styler/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/MightyMedia/Mighty-Form-Styler/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a name="mighty-form-styler-for-jquery" class="anchor" href="#mighty-form-styler-for-jquery"><span class="octicon octicon-link"></span></a>Mighty Form Styler for jQuery</h1>
+    <section class="main-content">
+      <h1>
+<a id="mighty-form-styler-for-jquery" class="anchor" href="#mighty-form-styler-for-jquery" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mighty Form Styler for jQuery</h1>
 
 <p>Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.</p>
 
-<p>Version 1.0.8</p>
+<p>Version 1.1.0</p>
 
 <p>For changelog see: <a href="https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/CHANGELOG.md">https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/CHANGELOG.md</a></p>
 
 <p>Requires jQuery 1.7 or newer.</p>
 
 <p>Licensed under:
-MIT License - <a href="https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt">https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt</a></p>
+MIT License - <a href="https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE">https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE</a></p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>jQuery 1.7+</li>
-</ul><h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>To use Mighty Form Styler make sure you have jQuery 1.7 or newer. Next, include the files jquery.mfs.css and jquery.mfs.min.js in your webpage. The css file contains some default styling for the select element.</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"jquery.mfs.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"jquery.mfs.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>jquery.mfs.css<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>jquery.mfs.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
 
 <h2>
-<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic usage</h2>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Basic usage</h2>
 
 <h3>
-<a name="initialize" class="anchor" href="#initialize"><span class="octicon octicon-link"></span></a>Initialize</h3>
+<a id="initialize" class="anchor" href="#initialize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initialize</h3>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">();</span>
-<span class="p">});</span>
-</pre></div>
-
-<h3>
-<a name="refresh-eg-when-you-updated-the-values-via-ajax" class="anchor" href="#refresh-eg-when-you-updated-the-values-via-ajax"><span class="octicon octicon-link"></span></a>Refresh (e.g. when you updated the values via ajax)</h3>
-
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">(</span><span class="s1">'refresh'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-c1">document</span>).<span class="pl-en">ready</span>(<span class="pl-k">function</span>(){
+    <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>();
+});</pre></div>
 
 <h3>
-<a name="remove" class="anchor" href="#remove"><span class="octicon octicon-link"></span></a>Remove</h3>
+<a id="refresh-eg-when-you-updated-the-values-via-ajax" class="anchor" href="#refresh-eg-when-you-updated-the-values-via-ajax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Refresh (e.g. when you updated the values via ajax)</h3>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">(</span><span class="s1">'destroy'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>(<span class="pl-s"><span class="pl-pds">'</span>refresh<span class="pl-pds">'</span></span>);</pre></div>
+
+<h3>
+<a id="remove" class="anchor" href="#remove" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Remove</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>(<span class="pl-s"><span class="pl-pds">'</span>destroy<span class="pl-pds">'</span></span>);</pre></div>
 
 <h2>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
 
 <p>The following options are available.</p>
 
 <h3>
-<a name="dropdownhandle" class="anchor" href="#dropdownhandle"><span class="octicon octicon-link"></span></a>dropdownHandle</h3>
+<a id="dropdownhandle" class="anchor" href="#dropdownhandle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>dropdownHandle</h3>
 
 <p>Add text or HTML in the dropdown handle (the little arrow down). For example, when you want to use fontawesome icons in the handle.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'dropdownHandle'</span><span class="o">:</span> <span class="s1">'&lt;i class="icon-chevron-down"&gt;&lt;/i&gt;'</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>dropdownHandle<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;i class="icon-chevron-down"&gt;&lt;/i&gt;<span class="pl-pds">'</span></span>
+});</pre></div>
 
 <h3>
-<a name="enablescroll" class="anchor" href="#enablescroll"><span class="octicon octicon-link"></span></a>enableScroll</h3>
+<a id="enablescroll" class="anchor" href="#enablescroll" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>enableScroll</h3>
 
 <p>Enable a scrollbar in the dropdown list, as default this is set to <em>false</em>.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'enableScroll'</span> <span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>enableScroll<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-c1">true</span>
+});</pre></div>
 
 <h3>
-<a name="maxheight" class="anchor" href="#maxheight"><span class="octicon octicon-link"></span></a>maxHeight</h3>
+<a id="maxheight" class="anchor" href="#maxheight" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>maxHeight</h3>
 
 <p>Set the max height in pixels for the dropdown list, as default this is set to <em>200</em>. The setting <em>enableScroll</em> needs to be set to <em>true</em> for this setting to have effect.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'enableScroll'</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s1">'maxHeight'</span>    <span class="o">:</span> <span class="mi">150</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>enableScroll<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">'</span>maxHeight<span class="pl-pds">'</span></span>    <span class="pl-k">:</span> <span class="pl-c1">150</span>
+});</pre></div>
 
 <h3>
-<a name="autowidth" class="anchor" href="#autowidth"><span class="octicon octicon-link"></span></a>autoWidth</h3>
+<a id="autowidth" class="anchor" href="#autowidth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>autoWidth</h3>
 
 <p>Make dropdown list width adjust to widest option.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'autoWidth'</span> <span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>autoWidth<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-c1">true</span>
+});</pre></div>
 
 <h3>
-<a name="disabletouch" class="anchor" href="#disabletouch"><span class="octicon octicon-link"></span></a>disableTouch</h3>
+<a id="disabletouch" class="anchor" href="#disabletouch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>disableTouch</h3>
 
 <p>Use native select dropdown on mobile and touch devices.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'disableTouch'</span> <span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>disableTouch<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-c1">true</span>
+});</pre></div>
 
 <h3>
-<a name="multipletitle" class="anchor" href="#multipletitle"><span class="octicon octicon-link"></span></a>multipleTitle</h3>
+<a id="multipletitle" class="anchor" href="#multipletitle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>multipleTitle</h3>
 
 <p>Set the title used for the selected option ie 'x selected'. This setting only has effect on select elements with the multiple attribute set.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'multipleTitle'</span> <span class="o">:</span> <span class="s1">'selected'</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>multipleTitle<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>selected<span class="pl-pds">'</span></span>
+});</pre></div>
 
 <h3>
-<a name="multipletitlenone" class="anchor" href="#multipletitlenone"><span class="octicon octicon-link"></span></a>multipleTitleNone</h3>
+<a id="multipletitlenone" class="anchor" href="#multipletitlenone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>multipleTitleNone</h3>
 
 <p>Set an alternative title used for the selected option when no options are selected. This setting only has effect on select elements with the multiple attribute set.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'multipleTitleNone'</span> <span class="o">:</span> <span class="s1">'Make a selection'</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>multipleTitleNone<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Make a selection<span class="pl-pds">'</span></span>
+});</pre></div>
 
 <h3>
-<a name="multipleautoclose" class="anchor" href="#multipleautoclose"><span class="octicon octicon-link"></span></a>multipleAutoClose</h3>
+<a id="multipleautoclose" class="anchor" href="#multipleautoclose" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>multipleAutoClose</h3>
 
 <p>Set to false to keep a multi select open when selecting options. This setting only has effect on select elements with the multiple attribute set.</p>
 
-<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'form'</span><span class="p">).</span><span class="nx">mfs</span><span class="p">({</span>
-    <span class="s1">'multipleAutoClose'</span> <span class="o">:</span> <span class="kc">false</span>
-<span class="p">});</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>form<span class="pl-pds">'</span></span>).<span class="pl-en">mfs</span>({
+    <span class="pl-s"><span class="pl-pds">'</span>multipleAutoClose<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-c1">false</span>
+});</pre></div>
+
+<h3>
+<a id="alternative-title-when-selected-value-is-an-empty-string" class="anchor" href="#alternative-title-when-selected-value-is-an-empty-string" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>alternative title when selected value is an empty string</h3>
+
+<p>This can be useful when you don't use a label for you element but you want the first option to be something like 'Reset filter' and you don't want that value being displayed on de select field. See issue #18.</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">select</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>my-select<span class="pl-pds">"</span></span> <span class="pl-e">data-alt-title</span>=<span class="pl-s"><span class="pl-pds">"</span>Select option<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">option</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>&gt;Reset filter&lt;/<span class="pl-ent">option</span>&gt;
+    &lt;<span class="pl-ent">option</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>opt1<span class="pl-pds">"</span></span>&gt;Option 1&lt;/<span class="pl-ent">option</span>&gt;
+    &lt;<span class="pl-ent">option</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>opt2<span class="pl-pds">"</span></span>&gt;Option 2&lt;/<span class="pl-ent">option</span>&gt;
+&lt;/<span class="pl-ent">select</span>&gt;</pre></div>
 
 <h2>
-<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h2>
 
 <p>You can preview a live demo at: <a href="http://www.binkje.nl/mfs/">http://www.binkje.nl/mfs/</a></p>
 
 <h2>
-<a name="issues" class="anchor" href="#issues"><span class="octicon octicon-link"></span></a>Issues</h2>
+<a id="issues" class="anchor" href="#issues" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issues</h2>
 
 <p>If you have any ideas or bugs, please submit them to the GitHub issue tracker at <a href="https://github.com/MightyMedia/Mighty-Form-Styler/issues">https://github.com/MightyMedia/Mighty-Form-Styler/issues</a>.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Mighty Form Styler for jQuery maintained by <a href="https://github.com/MightyMedia">MightyMedia</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/MightyMedia/Mighty-Form-Styler">Mighty Form Styler for jQuery</a> is maintained by <a href="https://github.com/MightyMedia">MightyMedia</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
