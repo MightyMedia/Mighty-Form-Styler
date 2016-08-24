@@ -55,6 +55,7 @@
                 <option value="peugeot">Peugeot</option>
                 <option value="volkswagen">Volkswagen</option>
                 <option value="volvo">Volvo</option>
+                <option value="opt5">Dit is een erg lange optie wat doet hij daar mee? Nou?</option>
             </select>
         </li>
     </ul>
@@ -136,7 +137,7 @@
     </ul>
 </form>
 
-<form>
+<form class="emptyfirstvalue">
     <ul>
         <li>
             <label for="carbrands4">Empty first value</label>
@@ -152,13 +153,30 @@
     </ul>
 </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<form class="multiselect">
+    <ul>
+        <li>
+            <label for="carbrands5">Multi select with skip class</label>
+            <select id="carbrands5" class="nope" name="multi-select" multiple>
+                <option value="ford">Ford</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="volvo">Volvo</option>
+            </select>
+        </li>
+    </ul>
+</form>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
+<script src="vendor/jquery-3.1.0.min.js"></script>
 <script src="../jquery.mfs.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
 
-/*
         $('form.default').mfs();
+
+        $('form.emptyfirstvalue').mfs();
 
         $('form.autowidth').mfs({
             'autoWidth': true
@@ -167,21 +185,19 @@
         $('form.disabletouch').mfs({
             'disableTouch': true
         });
-*/
 
-        $('form').mfs({
+        $('form.multiselect').mfs({
             'disableTouch'      : true,
             'multipleTitle'     : 'geselecteerd',
             'mutlipleTitleNone' : 'Niks geselecteerd',
             'multipleAutoClose' : false,
             'skipClasses'       : 'nope'
-        });/*
+        });
 
         $('form.withscroll').mfs({
             'maxHeight': 150,
             'enableScroll': true
         });
-*/
 
     });
 </script>

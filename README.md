@@ -9,7 +9,7 @@ For changelog see: https://github.com/MightyMedia/Mighty-Form-Styler/blob/master
 Requires jQuery 1.7 or newer.
 
 Licensed under:
-MIT License - https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
+MIT License - https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE
 
 ## Requirements
 
