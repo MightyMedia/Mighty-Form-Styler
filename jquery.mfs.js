@@ -4,7 +4,7 @@
  * Examples and documentation at: http://www.binkje.nl/mfs
  *
  * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.8
+ * Version: 1.0.10
  * Licensed under the MIT License:
  * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
  *
@@ -23,6 +23,7 @@
  *      'multipleTitle'     : 'selected'    // Set the title used for the selected option 'x selected', defaults to 'selected'
  *      'multipleTitleNone  : false         // Set alternative title for selected option on multi selects when no options are selected
  *      'mutlipleAutoClose  : true          // Set to false to keep a multi select open when selecting an option
+ *      'skipClasses'       : ''            // Set one or more classes for select elements that don't need our magic
  *           }
  *
  */
@@ -47,7 +48,15 @@
         var optionListLi        = optionList.find('li.mfs-option');
         var optionListOptions   = optionList.find('a');
 
+        var useAltTitle = false;
+        var altTitle = selectElm.data('altTitle');
+
+        if (typeof altTitle !== 'undefined' && altTitle.trim() !== '' ) {
+            useAltTitle = true;
+        }
+
         optionList.hide();
+        theContainer.removeClass('mfs-container-active');
         mfsSelectOpen = false;
         searchString = '';
 
@@ -65,6 +74,7 @@
                 var optionListAll = $('ul.mfs-options');
                 if (optionList.is(':visible')) {
                     optionList.hide();
+                    theContainer.removeClass('mfs-container-active');
                     mfsSelectOpen = false;
                     searchString = '';
                 }
@@ -72,6 +82,7 @@
                     optionListLi.removeClass('active');
                     optionListAll.hide();
                     optionList.show();
+                    theContainer.addClass('mfs-container-active');
                     var optionListSelected = optionList.find('li.mfs-option.selected');
                     if (optionListSelected.length > 0) {
                         optionListSelected.addClass('active');
@@ -96,9 +107,16 @@
             }
 
             if (multiple === false) {
+
+                var selectedOptionLabel = $(this).text();
+
+                if (useAltTitle === true && selectElmOptions.eq($(this).attr('index')).attr('value') === '') {
+                    selectedOptionLabel = altTitle;
+                }
+
                 selectElmOptions.removeAttr('selected');
                 selectElmOptions.eq($(this).attr('index')).prop('selected', 'selected');
-                selectedOption.html($(this).text()+'<span>'+mfsHandle+'</span>');
+                selectedOption.html(selectedOptionLabel+'<span>'+mfsHandle+'</span>');
 
                 optionListLi.removeClass('active').removeClass('selected');
                 $(this).closest('li').addClass('selected');
@@ -128,6 +146,7 @@
             if (settings.mutlipleAutoClose === true || multiple === false) {
                 optionList.hide();
                 mfsSelectOpen = false;
+                theContainer.removeClass('mfs-container-active');
             }
 
             searchString = '';
@@ -160,100 +179,135 @@
     // Create select
     var createSelect = function (thisSelect)
     {
-        var touchClass = 'notouch';
-        if (settings.disableTouch === true && touchDevice === true) {
-            touchClass = '';
-        }
+        var doCreation = true;
+        var useAltTitle = false;
+        var altTitle = thisSelect.data('altTitle');
 
-        var multiple = false;
-        if (thisSelect.attr('multiple')) {
-            multiple = true;
-        }
+        if (typeof settings.skipClasses !== 'undefined' && settings.skipClasses.trim() !== '') {
+            var skipClassesArray = settings.skipClasses.split(' ');
 
-        thisSelect.after('<div class="mfs-container '+touchClass+'"></div>');
-        var mfsContainer = thisSelect.next('div.mfs-container');
-        thisSelect.appendTo(mfsContainer);
+            if (skipClassesArray.length > 0) {
 
-        var mfsLabel = '';
-        var mfsHtml = '';
-        var mfsOptionsHtml = '';
-        var indexCount = 0;
-        var mfsUlStyle = '';
-        var mfsAStyle = '';
-        var selectedCount = 0;
+                for(var i=0; i<skipClassesArray.length; i++) {
+                    var thisSkipClass = skipClassesArray[i];
+                    if (typeof thisSkipClass !== 'undefined' && thisSkipClass.trim() !== '') {
 
-        if (multiple === true) {
-            if (settings.mutlipleTitleNone !== false) {
-                mfsLabel = settings.mutlipleTitleNone;
-            }
-            else {
-                mfsLabel = '<strong class="count">0</strong> '+settings.multipleTitle;
-            }
-        }
-
-        if (settings.autoWidth === true) {
-            mfsAStyle = 'style="white-space: nowrap;"';
-        }
-
-        thisSelect.find('> option, optgroup').each(function(){
-            var thisTagName = $(this).get(0).tagName.toLowerCase();
-            if (thisTagName === 'option') {
-                var thisActiveClass = '';
-                var thisLabel = $(this).html();
-                if (mfsLabel === '' || $(this).is(':selected')) {
-                    if (multiple === false) {
-                        mfsLabel = thisLabel;
-                    }
-                    if ($(this).is(':selected')) {
-                        thisActiveClass = ' selected';
-                        selectedCount++;
-                        if (multiple === true) {
-                            mfsLabel = '<strong class="count">'+selectedCount+'</strong> '+settings.multipleTitle;
+                        if (thisSelect.hasClass(thisSkipClass)) {
+                            doCreation = false;
                         }
+
                     }
                 }
-                mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
-                indexCount++;
             }
-            if (thisTagName === 'optgroup') {
-                var optGroupLabel = $(this).attr('label');
-                var mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
+        }
 
-                $(this).find('option').each(function(){
+        if (doCreation === true) {
+            var touchClass = 'notouch';
+
+            if (typeof altTitle !== 'undefined' && altTitle.trim() !== '' ) {
+                useAltTitle = true;
+            }
+
+            if (settings.disableTouch === true && touchDevice === true) {
+                touchClass = '';
+            }
+
+            var multiple = false;
+            if (thisSelect.attr('multiple')) {
+                multiple = true;
+            }
+
+            thisSelect.after('<div class="mfs-container '+touchClass+'"></div>');
+            var mfsContainer = thisSelect.next('div.mfs-container');
+            thisSelect.appendTo(mfsContainer);
+
+            var mfsLabel = '';
+            var mfsHtml = '';
+            var mfsOptionsHtml = '';
+            var indexCount = 0;
+            var mfsUlStyle = '';
+            var mfsAStyle = '';
+            var selectedCount = 0;
+
+            if (multiple === true) {
+                if (settings.mutlipleTitleNone !== false) {
+                    mfsLabel = settings.mutlipleTitleNone;
+                }
+                else {
+                    mfsLabel = '<strong class="count">0</strong> '+settings.multipleTitle;
+                }
+            }
+
+            if (settings.autoWidth === true) {
+                mfsAStyle = 'style="white-space: nowrap;"';
+            }
+
+            thisSelect.find('> option, optgroup').each(function(){
+                var thisTagName = $(this).get(0).tagName.toLowerCase();
+                if (thisTagName === 'option') {
                     var thisActiveClass = '';
                     var thisLabel = $(this).html();
                     if (mfsLabel === '' || $(this).is(':selected')) {
-                        mfsLabel = thisLabel;
+                        if (multiple === false) {
+
+                            if (useAltTitle === true && thisSelect.val() === '') {
+                                mfsLabel = altTitle;
+                            } else {
+                                mfsLabel = thisLabel;
+                            }
+
+                        }
                         if ($(this).is(':selected')) {
                             thisActiveClass = ' selected';
+                            selectedCount++;
+                            if (multiple === true) {
+                                mfsLabel = '<strong class="count">'+selectedCount+'</strong> '+settings.multipleTitle;
+                            }
                         }
                     }
-                    mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
+                    mfsOptionsHtml += '<li class="mfs-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
                     indexCount++;
-                });
+                }
+                if (thisTagName === 'optgroup') {
+                    var optGroupLabel = $(this).attr('label');
+                    var mfsOptGroupHtml = '<li class="mfs-optgroup">'+optGroupLabel+'</li>';
 
-                mfsOptionsHtml += mfsOptGroupHtml;
+                    $(this).find('option').each(function(){
+                        var thisActiveClass = '';
+                        var thisLabel = $(this).html();
+                        if (mfsLabel === '' || $(this).is(':selected')) {
+                            mfsLabel = thisLabel;
+                            if ($(this).is(':selected')) {
+                                thisActiveClass = ' selected';
+                            }
+                        }
+                        mfsOptGroupHtml += '<li class="mfs-option mfs-optgroup-option'+thisActiveClass+'"><a href="#" index="'+indexCount+'"'+mfsAStyle+'>'+thisLabel+'</a></li>';
+                        indexCount++;
+                    });
+
+                    mfsOptionsHtml += mfsOptGroupHtml;
+                }
+            });
+
+            if (settings.dropdownHandle !== false) {
+                mfsHandle = settings.dropdownHandle;
             }
-        });
+            if (settings.enableScroll === true) {
+                mfsUlStyle = 'overflow-y:auto;max-height:'+settings.maxHeight+'px;';
+            }
+            if (settings.autoWidth === true) {
+                mfsUlStyle = 'width:auto;min-width:100%;';
+            }
+            if (mfsUlStyle.length > 0) {
+                mfsUlStyle = 'style="'+mfsUlStyle+'"';
+            }
 
-        if (settings.dropdownHandle !== false) {
-            mfsHandle = settings.dropdownHandle;
-        }
-        if (settings.enableScroll === true) {
-            mfsUlStyle = 'overflow-y:auto;max-height:'+settings.maxHeight+'px;';
-        }
-        if (settings.autoWidth === true) {
-            mfsUlStyle = 'width:auto;min-width:100%;';
-        }
-        if (mfsUlStyle.length > 0) {
-            mfsUlStyle = 'style="'+mfsUlStyle+'"';
-        }
+            mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
+            mfsHtml += '<ul class="mfs-options"'+mfsUlStyle+'>'+mfsOptionsHtml+'</ul>';
 
-        mfsHtml += '<a class="mfs-selected-option" href="#">'+mfsLabel+'<span>'+mfsHandle+'</span></a>';
-        mfsHtml += '<ul class="mfs-options"'+mfsUlStyle+'>'+mfsOptionsHtml+'</ul>';
-
-        mfsContainer.prepend(mfsHtml);
-        enableMagic(mfsContainer,multiple);
+            mfsContainer.prepend(mfsHtml);
+            enableMagic(mfsContainer,multiple);
+        }
     };
 
     // Destroy the magic for the select in this container
@@ -328,7 +382,8 @@
                 'disableTouch'      : false,
                 'multipleTitle'     : 'selected',
                 'mutlipleTitleNone' : false,
-                'multipleAutoClose' : true
+                'multipleAutoClose' : true,
+                'skipClasses'       : ''
             }, options);
 
             if (this.is("select")) {
@@ -362,6 +417,7 @@
                 $('ul.mfs-options').hide();
                 mfsSelectOpen = false;
                 searchString = '';
+                $('.mfs-container').removeClass('mfs-container-active');
             });
 
             // Make the new select behave more like a real one
@@ -394,6 +450,7 @@
                     }
                     else if (keyDown === 27) { // Escape
                         $('ul.mfs-options').hide();
+                        $('.mfs-container').removeClass('mfs-container-active');
                         mfsSelectOpen = false;
                     }
                 }
