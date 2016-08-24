@@ -63,6 +63,17 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
+	"\/jquery.mfs-1.1.0.min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/jquery.mfs-1.1.0.min.js",
+		"outputAbbreviatedPath": "\/min\/jquery.mfs-1.1.0.min.min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 0
+		},
 	"\/jquery.mfs.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -93,17 +104,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
-		},
-	"\/jquery.mfs.old.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/jquery.mfs.old.js",
-		"outputAbbreviatedPath": "\/min\/jquery.mfs.old.min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
-		"syntaxCheckerStyle": 0
 		},
 	"\/mfs.jquery.json": {
 		"fileType": 524288,
