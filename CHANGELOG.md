@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 / 2016-08-24
 
 * Fixed issue #11: The last initialization of mfs overwrites the settings of all earlier initialized mfs-instances.
 * Fixed issue with multipleAutoClose not working

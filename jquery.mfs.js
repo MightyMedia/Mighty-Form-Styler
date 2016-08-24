@@ -3,10 +3,10 @@
  * Replaces your form select element for a html dropdown list which you can easily style with css.
  * Examples and documentation at: http://www.binkje.nl/mfs
  *
- * Copyright (c) 2012-2014 Bas van den Wijngaard
- * Version: 1.0.10
+ * Copyright (c) 2012-2016 Bas van den Wijngaard
+ * Version: 1.1.0
  * Licensed under the MIT License:
- * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt
+ * https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE
  *
  * Requires jQuery 1.7 or later
  *
@@ -74,7 +74,6 @@ $.extend($.expr[":"], {
 	var mfsSelectOpen = false;
 	var searchTimer = false;
 	var searchString = '';
-	var mfsHandle = '&nbsp;';
 	var touchDevice = /Android|webOS|iPad|iPhone/i.test(navigator.userAgent);
 
 	var pluginObject = {
@@ -402,7 +401,7 @@ $.extend($.expr[":"], {
 
 			optionListOptions.click(function() {
 
-				mfsHandle = '&nbsp;';
+				var mfsHandle = '&nbsp;';
 
 				if (self.options.dropdownHandle !== false) {
 
@@ -569,6 +568,7 @@ $.extend($.expr[":"], {
 				var mfsContainer = thisSelect.next('div.mfs-container');
 				thisSelect.appendTo(mfsContainer);
 
+				var mfsHandle = '&nbsp;';
 				var mfsLabel = '';
 				var mfsHtml = '';
 				var mfsOptionsHtml = '';
@@ -844,18 +844,20 @@ $.extend($.expr[":"], {
 	};
 
 	$.fn[pluginName].options = {
-		refresh: true,
-		radio: false,
-		checkbox: false,
-		dropdownHandle: false,
-		enableScroll: false,
-		maxHeight: 200,
-		autoWidth: false,
-		disableTouch: false,
-		multipleTitle: 'selected',
-		mutlipleTitleNone: false,
-		multipleAutoClose: true,
-		skipClasses: ''
+
+		refresh				: true,
+		radio				: false,
+		checkbox			: false,
+		dropdownHandle		: false,
+		enableScroll		: false,
+		maxHeight			: 200,
+		autoWidth			: false,
+		disableTouch		: false,
+		multipleTitle		: 'selected',
+		mutlipleTitleNone	: false,
+		multipleAutoClose	: true,
+		skipClasses			: ''
+
 	};
 
 })(jQuery, window, document);
