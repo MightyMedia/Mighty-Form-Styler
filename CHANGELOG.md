@@ -3,7 +3,7 @@
 ## Unreleased
 
 * Fixed issue #11: The last initialization of mfs overwrites the settings of all earlier initialized mfs-instances.
-* Added travis ci config
+* Fixed issue with multipleAutoClose not working
 
 ## 1.0.10 / 2016-06-06
 
