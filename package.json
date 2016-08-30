@@ -1,15 +1,17 @@
 {
     "name": "mfs",
     "title": "Mighty Form Styler for jQuery",
-    "description": "Mighty Form Styler for jQuery replaces you form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.",
+    "description": "Mighty Form Styler for jQuery replaces your form select element with a html ul list so you can easily and completely style it with css. With some little magic it behaves just like a regular select element.",
     "keywords": [
+	    "ecosystem:jquery",
+	    "jquery-plugin",
         "form",
         "select",
         "dropdown",
         "formfields",
         "ui"
     ],
-    "version": "1.0.10",
+    "version": "1.1.0",
     "author": {
         "name": "Bas van den Wijngaard",
         "email": "bas@mightymedia.nl",
@@ -25,13 +27,12 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE.txt"
+            "url": "https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/LICENSE"
         }
     ],
     "homepage": "http://www.binkje.nl/mfs/",
-    "demo": "http://www.binkje.nl/mfs/",
     "bugs": "https://github.com/MightyMedia/Mighty-Form-Styler/issues",
-    "docs": "https://github.com/MightyMedia/Mighty-Form-Styler/blob/master/README.md",
+    "repository": "https://github.com/MightyMedia/Mighty-Form-Styler",
     "dependencies": {
         "jquery": ">=1.7"
     }
